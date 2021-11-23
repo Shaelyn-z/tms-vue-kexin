@@ -1,12 +1,17 @@
 export const constantRouterMap = [
   {
-    path: '/',
-    component: () => import('@/views'),
+    path: '/system',
+    component: () => import('@/views/system'),
     children: [
       {
-        path: '/menu',
-        component: () => import('@/views/system/menu')
-      }]
+        path: '/system/menu',
+        component: () => import('@/views/system/menu/index.vue'),
+      },
+      {
+        path: '/system/role',
+        component: () => import('@/views/system/role/index.vue'),
+      },
+    ],
   },
-
+  
 ]

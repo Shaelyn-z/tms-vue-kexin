@@ -67,8 +67,9 @@ export default {
     handleClick(e) {
       console.log('click', e)
     },
-    titleClick(e) {
-      console.log('titleClick', e)
+    titleClick() {
+      console.log(this.$store)
+      this.$message.info(this.$store.state.Users.name)
     },
   },
 }

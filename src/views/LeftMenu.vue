@@ -1,61 +1,29 @@
 <template>
   <a-menu
-    :default-selected-keys="['1']"
-    :open-keys.sync="openKeys"
+    :default-selected-keys="['11']"
     mode="inline"
     @click="handleClick"
     :inline-collapsed="menuCollapsed"
   >
-    <a-sub-menu key="sub1" @titleClick="titleClick">
+    <a-sub-menu :key="menu.path" v-for="menu in routeList">
       <span slot="title">
-        <a-icon type="mail" /><span>Navigation One</span>
+        <a-icon :type="menu.icon" /><span>{{ menu.name }}</span>
       </span>
-      <a-menu-item-group key="g1">
-        <template slot="title">
-          <a-icon type="qq" /><span>Item 1</span>
-        </template>
-        <a-menu-item key="1"> Option 1 </a-menu-item>
-        <a-menu-item key="2"> Option 2 </a-menu-item>
-      </a-menu-item-group>
-      <a-menu-item-group key="g2" title="Item 2">
-        <a-menu-item key="3"> Option 3 </a-menu-item>
-        <a-menu-item key="4"> Option 4 </a-menu-item>
-      </a-menu-item-group>
-    </a-sub-menu>
-    <a-sub-menu key="sub2" @titleClick="titleClick">
-      <span slot="title"
-        ><a-icon type="appstore" /><span>Navigation Two</span></span
-      >
-      <a-menu-item key="5"> Option 5 </a-menu-item>
-      <a-menu-item key="6"> Option 6 </a-menu-item>
-      <a-sub-menu key="sub3" title="Submenu">
-        <a-menu-item key="7"> Option 7 </a-menu-item>
-        <a-menu-item key="8"> Option 8 </a-menu-item>
-      </a-sub-menu>
-    </a-sub-menu>
-    <a-sub-menu key="sub4">
-      <span slot="title"
-        ><a-icon type="setting" /><span>Navigation Three</span></span
-      >
-      <a-menu-item key="9"> Option 9 </a-menu-item>
-      <a-menu-item key="10"> Option 10 </a-menu-item>
-      <a-menu-item key="11"> Option 11 </a-menu-item>
-      <a-menu-item key="12"> Option 12 </a-menu-item>
+
+      <a-menu-item :key="subMenu.path" v-for="subMenu in menu.children">
+        <a-icon :type="subMenu.icon" />{{ subMenu.name }}
+      </a-menu-item>
     </a-sub-menu>
   </a-menu>
 </template>
 <script>
+import routeList from '@/config/router-mock'
 export default {
   data() {
     return {
       current: ['mail'],
-      openKeys: ['sub1'],
+      routeList,
     }
-  },
-  watch: {
-    openKeys(val) {
-      console.log('openKeys', val)
-    },
   },
   props: {
     menuCollapsed: {
@@ -64,14 +32,19 @@ export default {
     },
   },
   methods: {
+    // 父节点点击事件
     handleClick(e) {
+      this.$router.push({ path: e.key })
       console.log('click', e)
-    },
-    titleClick(e) {
-      console.log('titleClick', e)
     },
   },
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+  border: none;
+}
+</style>

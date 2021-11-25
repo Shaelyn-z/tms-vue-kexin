@@ -2,7 +2,7 @@
   <div class="tab-header">
     <div
       :class="[{ 'is-active': $route.path === item.path }, 'tabs-tag']"
-      @contextmenu.prevent="openContextMenu"
+      @contextmenu.prevent="openContextMenu($event, item)"
       v-for="item in openMenuList"
       :key="item.id"
     >
@@ -15,40 +15,48 @@
       :style="{ left: `${left}px`, top: `${top}px` }"
       class="context-menu"
     >
-      <li><a-icon type="reload" />刷新</li>
-      <li><a-icon type="arrow-left" />关闭左侧</li>
-      <li><a-icon type="arrow-right" />关闭右侧</li>
-      <li><a-icon type="close" />关闭其他</li>
+      <li @click="doRefresh"><a-icon type="reload" />刷新</li>
+      <li @click="closeMenu('left')"><a-icon type="arrow-left" />关闭左侧</li>
+      <li @click="closeMenu('right')"><a-icon type="arrow-right" />关闭右侧</li>
+      <li @click="closeMenu('others')"><a-icon type="close" />关闭其他</li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex'
 export default {
   name: 'TabHeader',
   data() {
     return {
       visible: false,
-      openMenuList: [
-        { id: 1, name: '菜单管理', path: '/system/menu' },
-        { id: 2, name: '用户管理', path: '/system/role' },
-      ],
-      activeMenu: 1,
-      left: 100,
-      top: 100,
+      left: 0,
+      top: 0,
+      clickContextTab: {}
     }
+  },
+  computed: {
+    ...mapState('menu', ['openMenuList'])
   },
   mounted() {
     document.documentElement.onclick = () => (this.visible = false)
   },
   methods: {
-    log() {},
-    openContextMenu(e) {
+    ...mapMutations('menu', ['deleteOpenMenu', 'setCurrMenu']),
+    openContextMenu(e, tab) {
       this.left = e.clientX
       this.top = e.clientY
       this.visible = true
+      this.clickContextTab = tab
     },
-  },
+    doRefresh() {
+      this.$router.go(0)
+    },
+    closeMenu(type) {
+      this.setCurrMenu(this.clickContextTab)
+      this.deleteOpenMenu(Object.assign({ type }, this.clickContextTab))
+    }
+  }
 }
 </script>
 

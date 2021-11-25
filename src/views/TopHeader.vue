@@ -32,7 +32,7 @@
         </a-menu>
       </a-dropdown>
 
-      <div class="right-content">
+      <div class="right-content" @click="logout">
         <a-icon type="logout" />
         <span>退出登录</span>
       </div>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { clearStore } from '@/assets/js/utils'
 export default {
   props: {
     menuCollapsed: {
@@ -51,6 +52,10 @@ export default {
   methods: {
     toggleCollapse() {
       this.$emit('update:menuCollapsed', !this.menuCollapsed)
+    },
+    logout() {
+      clearStore()
+      window.location.href = '/login'
     },
   },
 }
@@ -90,6 +95,7 @@ export default {
       padding: 0 10px;
       display: flex;
       align-items: center;
+      cursor: pointer;
       color: @light-text-color;
       i {
         margin-right: 5px;

@@ -1,11 +1,13 @@
 <template>
   <a-menu
-    :default-selected-keys="['11']"
+    :default-selected-keys="[currMenu.path || '/index']"
+    :default-open-keys="currMenu.pathList"
     mode="inline"
     @click="handleClick"
     :inline-collapsed="menuCollapsed"
   >
-    <a-sub-menu :key="menu.path" v-for="menu in routeList">
+    <a-menu-item key="/index">首页</a-menu-item>
+    <a-sub-menu :key="menu.path" v-for="menu in allMenuList">
       <span slot="title">
         <a-icon :type="menu.icon" /><span>{{ menu.name }}</span>
       </span>
@@ -17,27 +19,38 @@
   </a-menu>
 </template>
 <script>
-import routeList from '@/config/router-mock'
+import { mapState, mapMutations } from 'vuex'
 export default {
   data() {
-    return {
-      current: ['mail'],
-      routeList,
-    }
+    return {}
   },
   props: {
     menuCollapsed: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
+  },
+  mounted() {
+    if (!this.currMenu.path) {
+      this.setCurrMenu({ path: '/index' })
+      this.addOpenMenu({ path: '/index', name: '首页', closeable: false })
+    }
+  },
+  computed: {
+    ...mapState('menu', ['allMenuList', 'currMenu'])
   },
   methods: {
-    // 父节点点击事件
-    handleClick(e) {
-      this.$router.push({ path: e.key })
-      console.log('click', e)
-    },
-  },
+    ...mapMutations('menu', ['setCurrMenu', 'addOpenMenu']),
+    /**
+     * @description 菜单点击事件
+     * @param {*} menu 被点击的菜单对象
+     */
+    handleClick({ item, key, keyPath }) {
+      this.$router.push({ path: key })
+      this.setCurrMenu({ path: key, pathList: keyPath })
+      this.addOpenMenu({ path: key, name: item.$el.innerText })
+    }
+  }
 }
 </script>
 

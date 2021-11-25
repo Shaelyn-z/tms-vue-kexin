@@ -16,6 +16,5 @@ const routeList = [{
         name: '角色管理'
       }
     ]
-  },
-]
+  },]
 export default routeList

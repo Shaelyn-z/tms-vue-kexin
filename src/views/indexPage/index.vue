@@ -1,9 +1,11 @@
 <template>
-  <div>角色管理</div>
+  <div>首页</div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'IndexPage'
+}
 </script>
 
 <style></style>

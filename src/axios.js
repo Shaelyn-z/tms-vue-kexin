@@ -7,18 +7,27 @@ const request = axios.create({
     "Content-Type": "application/json;charset=utf8"
   }
 })
+const source = axios.CancelToken.source()
 
 request.interceptors.request.use(config => {
-  console.log(config);
+  return config
+}, error => {
+  console.error(error);
 })
 
-request.interceptors.response(response => {
-  console.log(response);
-  message.info('请求成功')
-  message.error('请求失败')
-  return Promise.resolve(response)
+request.interceptors.response.use(response => {
+  if (response.data.code === 200) {
+    message.info(response.data.message)
+    return Promise.resolve(response)
+  } else if (response.data.code === -200) {
+    // 取消正在请求的其他需求
+    source.cancel()
+    message.error(response.data.msg)
+    return Promise.resolve(response)
+  }
 }, error => {
-  console.log(error);
+  console.error(error);
+  return Promise.reject(error)
 })
 
 export default request

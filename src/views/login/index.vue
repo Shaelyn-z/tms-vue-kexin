@@ -44,8 +44,8 @@
 import { mapMutations } from 'vuex'
 import routeList from '@/config/router-mock'
 // import jsEncrypt from 'jsencrypt'
-import Cookies from 'js-cookie'
-import { encryptPublicKey } from '@/static/constants'
+// import Cookies from 'js-cookie'
+// import { encryptPublicKey } from '@/static/constants'
 export default {
   data() {
     return {
@@ -72,15 +72,19 @@ export default {
           // const encrypt = new jsEncrypt()
           // encrypt.setPublicKey(encryptPublicKey)
           // const data = encrypt.encrypt(JSON.stringify(this.loginForm))
-          this.$api('login', { code: 200, msg: '登录成功' }).then((res) => {
-            if (res.data.code === 200) {
-              Cookies.set('cookie', encryptPublicKey)
-              // 登录之后需要带出路由参数信息
-              this.setAllMenuList(routeList)
-              setTimeout(() => {
-                this.$router.push('/index')
-              }, 1000)
-            }
+          this.$api('login', { code: 200, msg: '登录成功' }).then(() => {
+            this.setAllMenuList(routeList)
+            setTimeout(() => {
+              this.$router.push('/index')
+            }, 1000)
+            // if (res.data.code === 200) {
+            //   Cookies.set('cookie', encryptPublicKey)
+            //   // 登录之后需要带出路由参数信息
+            //   this.setAllMenuList(routeList)
+            //   setTimeout(() => {
+            //     this.$router.push('/index')
+            //   }, 1000)
+            // }
           })
         } else {
           return false

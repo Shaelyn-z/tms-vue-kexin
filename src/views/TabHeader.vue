@@ -3,11 +3,16 @@
     <div
       :class="[{ 'is-active': $route.path === item.path }, 'tabs-tag']"
       @contextmenu.prevent="openContextMenu($event, item)"
-      v-for="item in openMenuList"
+      v-for="(item, index) in openMenuList"
       :key="item.id"
+      @click="openThisMenu(item)"
     >
       <span>{{ item.name }}</span>
-      <a-icon type="close"></a-icon>
+      <a-icon
+        v-if="item.closeable"
+        type="close"
+        @click.stop="closeThisMenu(item, index)"
+      ></a-icon>
     </div>
 
     <ul
@@ -49,12 +54,20 @@ export default {
       this.visible = true
       this.clickContextTab = tab
     },
+    openThisMenu(menu) {
+      this.setCurrMenu(menu)
+      this.$router.push({ path: menu.path })
+    },
     doRefresh() {
       this.$router.go(0)
     },
+    closeThisMenu(item, index) {
+      this.deleteOpenMenu(Object.assign({ type: 'this' }, item))
+      this.$router.push({ path: this.openMenuList[index - 1].path })
+    },
     closeMenu(type) {
-      this.setCurrMenu(this.clickContextTab)
       this.deleteOpenMenu(Object.assign({ type }, this.clickContextTab))
+      this.$router.push({ path: this.clickContextTab.path })
     }
   }
 }

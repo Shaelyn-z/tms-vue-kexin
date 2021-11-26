@@ -3,6 +3,7 @@
     :default-selected-keys="[currMenu.path || '/index']"
     :default-open-keys="currMenu.pathList"
     mode="inline"
+    :selectedKeys="[currMenu.path || '/index']"
     @click="handleClick"
     :inline-collapsed="menuCollapsed"
   >
@@ -46,9 +47,14 @@ export default {
      * @param {*} menu 被点击的菜单对象
      */
     handleClick({ item, key, keyPath }) {
-      this.$router.push({ path: key })
       this.setCurrMenu({ path: key, pathList: keyPath })
-      this.addOpenMenu({ path: key, name: item.$el.innerText })
+      this.addOpenMenu({
+        path: key,
+        name: item.$el.innerText,
+        pathList: keyPath,
+        closeable: true
+      })
+      this.$router.push({ path: key })
     }
   }
 }

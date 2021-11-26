@@ -12,7 +12,7 @@ const source = axios.CancelToken.source()
 request.interceptors.request.use(config => {
   return config
 }, error => {
-  console.error(error);
+  console.log(error);
 })
 
 request.interceptors.response.use(response => {
@@ -26,8 +26,8 @@ request.interceptors.response.use(response => {
     return Promise.resolve(response)
   }
 }, error => {
-  console.error(error);
-  return Promise.reject(error)
+  console.log(error);
+  return Promise.resolve(1)
 })
 
 export default request

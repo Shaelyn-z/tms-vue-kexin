@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Cookies from 'js-cookie'
+import {getStore} from '@/assets/js/utils'
 import {message} from 'ant-design-vue'
 import {constantRouterMap} from '@/config/router.config'
 
@@ -13,14 +14,18 @@ Vue.use(Router)
 const router = new Router({mode: 'hash', routes: constantRouterMap})
 
 router.beforeEach((to, from, next) => {
-  if (to.path.startsWith('/login') || Cookies.get('cookie')) {
+  const currMenu = getStore('currMenu', 'object')
+  if (to.path.startsWith('/login')) {
     next()
+  } else if (!Cookies.get('cookie')) {
+    message.error('请先登录...')
+    next('/login')
+  } else if (currMenu.path && currMenu.path !== to.path) {
+    // 如果从浏览器输入，
+    message.error('输入路径无效...')
+    next(currMenu.path)
   } else {
-    // TODO：需要判断token是否存在，假如不存在需要跳转到登录页面
-    if (!Cookies.get('cookie')) {
-      message.error('请先登录...')
-      next('/login')
-    }
+    next()
   }
   /* 路由发生变化修改页面title */
   if (to.meta.title) {

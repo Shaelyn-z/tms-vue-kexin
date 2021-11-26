@@ -2,12 +2,12 @@
   <a-menu
     :default-selected-keys="[currMenu.path || '/index']"
     :default-open-keys="currMenu.pathList"
-    mode="inline"
     :selectedKeys="[currMenu.path || '/index']"
-    @click="handleClick"
     :inline-collapsed="menuCollapsed"
+    @click="handleClick"
+    mode="inline"
   >
-    <a-menu-item key="/index">首页</a-menu-item>
+    <a-menu-item key="/index"><a-icon type="home" />首页</a-menu-item>
     <a-sub-menu :key="menu.path" v-for="menu in allMenuList">
       <span slot="title">
         <a-icon :type="menu.icon" /><span>{{ menu.name }}</span>

@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Cookies from 'js-cookie'
 import {getStore} from '@/assets/js/utils'
 import {message} from 'ant-design-vue'
-import {constantRouterMap} from '@/config/router.config'
+import {constantRouterMap} from './router.config'
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function (location) {

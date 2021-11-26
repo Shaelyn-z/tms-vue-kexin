@@ -9,7 +9,17 @@
       <span>欢迎！</span>
     </div>
     <div class="right">
-      <a-icon type="search" />
+      <div class="left-content">
+        <a-icon type="search" @click="expandSearch = !expandSearch" />
+        <a-select
+          v-if="expandSearch"
+          showSearch
+          :showArrow="false"
+          placeholder="搜索菜单"
+        >
+          <a-select-option value="value">lucy</a-select-option>
+        </a-select>
+      </div>
       <a-dropdown class="right-content">
         <a>
           <a-icon type="user" />
@@ -43,11 +53,18 @@
 <script>
 import { clearStore } from '@/assets/js/utils'
 export default {
+  name: 'TopHeader',
+  data() {
+    return {
+      expandSearch: false,
+      menuSearchStr: null
+    }
+  },
   props: {
     menuCollapsed: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   methods: {
     toggleCollapse() {
@@ -55,9 +72,10 @@ export default {
     },
     logout() {
       clearStore()
-      window.location.href = '/login'
+      window.location.href = '/#/login'
     },
-  },
+    handleChange() {}
+  }
 }
 </script>
 
@@ -85,11 +103,32 @@ export default {
     }
   }
   .right {
-    width: 320px;
+    width: 480px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     padding: 0px 30px;
+    .left-content {
+      width: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      i {
+        margin-right: 10px;
+      }
+      /deep/ .ant-select-selection {
+        width: 150px;
+        background-color: @primary-color;
+        border: 0;
+        border-bottom: 1px solid #fff;
+        .ant-select-selection__placeholder {
+          color: #fff;
+        }
+        .ant-select-selection-selected-value {
+          color: #fff;
+        }
+      }
+    }
     .right-content {
       height: 40px;
       padding: 0 10px;
@@ -103,9 +142,6 @@ export default {
     }
     .right-content:hover {
       background: rgba(255, 255, 255, 0.1);
-    }
-    i {
-      margin: 0px 5px;
     }
   }
 }

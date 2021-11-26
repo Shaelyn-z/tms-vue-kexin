@@ -48,23 +48,44 @@ export default {
   },
   methods: {
     ...mapMutations('menu', ['deleteOpenMenu', 'setCurrMenu']),
+    /**
+     * @description 打开右键菜单
+     * @param {*} e 右键元素
+     * @param {*} tab 当前右键的菜单项
+     */
     openContextMenu(e, tab) {
       this.left = e.clientX
       this.top = e.clientY
       this.visible = true
       this.clickContextTab = tab
     },
+    /**
+     * @description 点击打开某个菜单
+     * @param {*} menu 菜单项
+     */
     openThisMenu(menu) {
       this.setCurrMenu(menu)
       this.$router.push({ path: menu.path })
     },
+    /**
+     * @description 刷新当前页
+     */
     doRefresh() {
       this.$router.go(0)
     },
+    /**
+     * @description 关闭当前菜单页
+     * @param {*} item 当前菜单项
+     * @param {*} index 当前菜单页索引
+     */
     closeThisMenu(item, index) {
       this.deleteOpenMenu(Object.assign({ type: 'this' }, item))
       this.$router.push({ path: this.openMenuList[index - 1].path })
     },
+    /**
+     * @description 关闭某部分打开的菜单
+     * @param {*} type 类型，left-关闭左侧；right-关闭右侧；others-关闭其他
+     */
     closeMenu(type) {
       this.deleteOpenMenu(Object.assign({ type }, this.clickContextTab))
       this.$router.push({ path: this.clickContextTab.path })

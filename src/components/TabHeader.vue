@@ -9,7 +9,7 @@
     >
       <span>{{ item.name }}</span>
       <a-icon
-        v-if="item.closeable"
+        v-if="item.closable"
         type="close"
         @click.stop="closeThisMenu(item, index)"
       ></a-icon>
@@ -41,7 +41,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('menu', ['openMenuList'])
+    ...mapState('menu', ['openMenuList', 'currMenu'])
   },
   mounted() {
     document.documentElement.onclick = () => (this.visible = false)
@@ -78,9 +78,9 @@ export default {
      * @param {*} item 当前菜单项
      * @param {*} index 当前菜单页索引
      */
-    closeThisMenu(item, index) {
+    closeThisMenu(item) {
       this.deleteOpenMenu(Object.assign({ type: 'this' }, item))
-      this.$router.push({ path: this.openMenuList[index - 1].path })
+      this.$router.push({ path: this.currMenu.path })
     },
     /**
      * @description 关闭某部分打开的菜单

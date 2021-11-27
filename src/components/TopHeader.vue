@@ -17,7 +17,14 @@
           :showArrow="false"
           placeholder="搜索菜单"
         >
-          <a-select-option value="value">lucy</a-select-option>
+          <a-select-option
+            v-for="item in flatAllMenuList"
+            :key="item.path"
+            :value="item.name"
+            @click.native="handleChange(item)"
+          >
+            {{ item.name }}
+          </a-select-option>
         </a-select>
       </div>
       <a-dropdown class="right-content">
@@ -52,6 +59,7 @@
 
 <script>
 import { clearStore } from '@/assets/js/utils'
+import { mapState } from 'vuex'
 export default {
   name: 'TopHeader',
   data() {
@@ -66,6 +74,12 @@ export default {
       default: false
     }
   },
+  computed: {
+    ...mapState('menu', ['allMenuList']),
+    flatAllMenuList() {
+      return this.flatDeep(this.allMenuList)
+    }
+  },
   methods: {
     toggleCollapse() {
       this.$emit('update:menuCollapsed', !this.menuCollapsed)
@@ -74,7 +88,24 @@ export default {
       clearStore()
       window.location.href = '/#/login'
     },
-    handleChange() {}
+    handleChange(menu) {
+      this.$createTab(menu)
+    },
+    flatDeep(arr, parentPath = '') {
+      const flatArr = []
+      arr.forEach((item) => {
+        if (item.children) {
+          flatArr.push(...this.flatDeep(item.children, item.path))
+        } else {
+          flatArr.push({
+            path: item.path,
+            name: item.name,
+            pathList: [`${parentPath}`]
+          })
+        }
+      })
+      return flatArr
+    }
   }
 }
 </script>
@@ -121,10 +152,9 @@ export default {
         background-color: @primary-color;
         border: 0;
         border-bottom: 1px solid #fff;
-        .ant-select-selection__placeholder {
-          color: #fff;
-        }
-        .ant-select-selection-selected-value {
+        .ant-select-selection__placeholder,
+        .ant-select-selection-selected-value,
+        .ant-select-search__field {
           color: #fff;
         }
       }

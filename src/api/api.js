@@ -1,7 +1,7 @@
 export default {
   login: {
     url: '/login',
-    method: 'GET',
+    method: 'POST',
     name: '登录'
   }
 }

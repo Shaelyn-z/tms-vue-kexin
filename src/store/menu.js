@@ -23,7 +23,17 @@ export default {
     // 关闭已打开的菜单
     deleteOpenMenu: (state, payload) => {
       const index = state.openMenuList.findIndex(item => item.path === payload.path)
-      const currMenu = payload.type === 'this' ? state.openMenuList[index - 1] : payload
+      let currMenu
+      if (payload.type === 'this' && state.currMenu.path === payload.path) {
+        // 如果是关闭具体某页，且该页刚好是打开状态，则选中该页的前一页
+        currMenu = state.openMenuList[index - 1]
+      } else if (payload.type === 'this' && state.currMenu.path !== payload.path) {
+        // 如果是关闭具体某页，且该页并不是当前页，则选中页不变
+        currMenu = state.currMenu
+      } else {
+        // 如果是其它关闭类型，则选中右键的tab页面
+        currMenu = payload
+      }
       switch (payload.type) { 
         // 关闭左侧，需要保留首页
         case 'left':

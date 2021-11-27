@@ -3,11 +3,15 @@
     :default-selected-keys="[currMenu.path || '/index']"
     :default-open-keys="currMenu.pathList"
     :selectedKeys="[currMenu.path || '/index']"
+    :openKeys.sync="currMenu.pathList"
     :inline-collapsed="menuCollapsed"
     @click="handleClick"
     mode="inline"
   >
-    <a-menu-item key="/index"><a-icon type="home" />首页</a-menu-item>
+    <a-menu-item key="/index">
+      <a-icon type="home" />
+      <span>首页</span>
+    </a-menu-item>
     <a-sub-menu :key="menu.path" v-for="menu in allMenuList">
       <span slot="title">
         <a-icon :type="menu.icon" /><span>{{ menu.name }}</span>
@@ -34,7 +38,7 @@ export default {
   mounted() {
     if (!this.currMenu.path) {
       this.setCurrMenu({ path: '/index' })
-      this.addOpenMenu({ path: '/index', name: '首页', closeable: false })
+      this.addOpenMenu({ path: '/index', name: '首页', closable: false })
     }
   },
   computed: {
@@ -47,14 +51,11 @@ export default {
      * @param {*} menu 被点击的菜单对象
      */
     handleClick({ item, key, keyPath }) {
-      this.setCurrMenu({ path: key, pathList: keyPath })
-      this.addOpenMenu({
+      this.$createTab({
         path: key,
         name: item.$el.innerText,
-        pathList: keyPath,
-        closeable: true
+        pathList: keyPath
       })
-      this.$router.push({ path: key })
     }
   }
 }

@@ -77,16 +77,16 @@ export default {
           setTimeout(() => {
             this.$router.push('/index')
           }, 1000)
-          this.$api('login', { code: 200, msg: '登录成功' }).then(() => {
-            // if (res.data.code === 200) {
-            //   Cookies.set('cookie', encryptPublicKey)
-            //   // 登录之后需要带出路由参数信息
-            //   this.setAllMenuList(routeList)
-            //   setTimeout(() => {
-            //     this.$router.push('/index')
-            //   }, 1000)
-            // }
-          })
+          // this.$api('login', data).then((res) => {
+          //   if (res.data.code === 200) {
+          //     Cookies.set('cookie', encryptPublicKey)
+          //     // 登录之后需要带出路由参数信息
+          //     this.setAllMenuList(routeList)
+          //     setTimeout(() => {
+          //       this.$router.push('/index')
+          //     }, 1000)
+          //   }
+          // })
         } else {
           return false
         }

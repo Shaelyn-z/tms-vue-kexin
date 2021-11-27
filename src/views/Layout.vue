@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import LeftMenu from '@/views/LeftMenu'
-import TopHeader from '@/views/TopHeader'
-import TabHeader from '@/views/TabHeader'
+import LeftMenu from '@/components/LeftMenu'
+import TopHeader from '@/components/TopHeader'
+import TabHeader from '@/components/TabHeader'
 export default {
   name: 'Index',
   components: {

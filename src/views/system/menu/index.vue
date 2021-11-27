@@ -1,78 +1,149 @@
 <template>
-  <div>
-    <a-menu
-      style="width: 256px"
-      :default-selected-keys="['1']"
-      :open-keys.sync="openKeys"
-      mode="inline"
-      @click="handleClick"
-    >
-      <a-sub-menu key="sub1" @titleClick="titleClick">
-        <span slot="title"
-          ><a-icon type="mail" /><span>Navigation One</span></span
-        >
-        <a-menu-item-group key="g1">
-          <template slot="title">
-            <a-icon type="qq" /><span>Item 1</span>
-          </template>
-          <a-menu-item key="1"> Option 1 </a-menu-item>
-          <a-menu-item key="2"> Option 2 </a-menu-item>
-        </a-menu-item-group>
-        <a-menu-item-group key="g2" title="Item 2">
-          <a-menu-item key="3"> Option 3 </a-menu-item>
-          <a-menu-item key="4"> Option 4 </a-menu-item>
-        </a-menu-item-group>
-      </a-sub-menu>
-      <a-sub-menu key="sub2" @titleClick="titleClick">
-        <span slot="title"
-          ><a-icon type="appstore" /><span>Navigation Two</span></span
-        >
-        <a-menu-item key="5"> Option 5 </a-menu-item>
-        <a-menu-item key="6"> Option 6 </a-menu-item>
-        <a-sub-menu key="sub3" title="Submenu">
-          <a-menu-item key="7"> Option 7 </a-menu-item>
-          <a-menu-item key="8"> Option 8 </a-menu-item>
-        </a-sub-menu>
-      </a-sub-menu>
-      <a-sub-menu key="sub4">
-        <span slot="title"
-          ><a-icon type="setting" /><span>Navigation Three</span></span
-        >
-        <a-menu-item key="9"> Option 9 </a-menu-item>
-        <a-menu-item key="10"> Option 10 </a-menu-item>
-        <a-menu-item key="11"> Option 11 </a-menu-item>
-        <a-menu-item key="12"> Option 12 </a-menu-item>
-      </a-sub-menu>
-    </a-menu>
-
-    <div class="testrem">
-      <a-button type="primary"> Primary </a-button>
+  <div class="container">
+    <a-form-model layout="inline" :model="formInline">
+      <a-form-model-item label="菜单名称">
+        <a-input v-model="formInline.menuName"></a-input>
+      </a-form-model-item>
+      <a-form-model-item>
+        <a-button type="primary" @click="queryByForm"> 查询 </a-button>
+      </a-form-model-item>
+    </a-form-model>
+    <div class="table-operator">
+      <a-button icon="plus" type="primary" @click="openModal()">新增</a-button>
     </div>
+    <a-table
+      :columns="columns"
+      row-key="id"
+      :data-source="data"
+      :pagination="pagination"
+      :loading="loading"
+      @change="handleTableChange"
+      size="middle"
+      bordered
+    >
+      <template slot="icon" slot-scope="record">
+        <a-icon :type="record" />
+      </template>
+      <template slot="operation" slot-scope="record">
+        <a-popconfirm title="确定删除吗？" @confirm="() => onDelete(record)">
+          <a href="javascript:;">删除</a>
+        </a-popconfirm>
+        <a href="javascript:;" @click="openModal(record)">&nbsp;编辑</a>
+      </template>
+    </a-table>
+
+    <a-modal
+      :title="modalTitle"
+      :visible="visible"
+      @ok="handleOk"
+      @cancel="handleCancel"
+    >
+      <a-form-model layout="inline" :model="formInline">
+        <a-form-model-item label="菜单名称">
+          <a-input v-model="formInline.menuName"></a-input>
+        </a-form-model-item>
+        <a-form-model-item>
+          <a-button type="primary" @click="queryByForm"> 查询 </a-button>
+        </a-form-model-item>
+      </a-form-model>
+    </a-modal>
   </div>
 </template>
 <script>
 export default {
   data() {
+    const columns = [
+      {
+        title: '序号',
+        width: 80,
+        customRender: (t, r, index) => parseInt(index) + 1
+      },
+      {
+        title: '菜单名称',
+        dataIndex: 'name'
+      },
+      {
+        title: '菜单类型',
+        dataIndex: 'type'
+      },
+      {
+        title: '菜单图标',
+        dataIndex: 'icon',
+        scopedSlots: { customRender: 'icon' }
+      },
+      {
+        title: '排序',
+        dataIndex: 'sort'
+      },
+      {
+        title: '备注',
+        dataIndex: 'remark'
+      },
+      {
+        title: '操作',
+        scopedSlots: { customRender: 'operation' }
+      }
+    ]
     return {
-      current: ['mail'],
-      openKeys: ['sub1'],
+      formInline: {
+        menuName: ''
+      },
+      data: [
+        {
+          id: 1,
+          name: '用户管理',
+          type: '1',
+          icon: 'user',
+          sort: 100,
+          remark: 'transfer'
+        },
+        {
+          id: 2,
+          name: '菜单管理',
+          type: '1',
+          icon: 'menu',
+          sort: 105,
+          remark: 'transfer'
+        },
+        {
+          id: 3,
+          name: '角色管理',
+          type: '1',
+          icon: 'user',
+          sort: 110,
+          remark: 'transfer'
+        }
+      ],
+      pagination: {},
+      loading: false,
+      visible: false,
+      modalTitle: '新增',
+      columns
     }
   },
-  watch: {
-    openKeys(val) {
-      console.log('openKeys', val)
-    },
-  },
   methods: {
-    handleClick(e) {
-      console.log('click', e)
+    queryByForm() {
+      console.log('查询接口')
     },
-    titleClick() {
-      console.log(this.$store)
-      this.$message.info(this.$store.state.Users.name)
+    handleTableChange(pagination, filters, sorter) {
+      console.log(pagination, filters, sorter)
+      const pager = { ...this.pagination }
+      pager.current = pagination.current
+      this.pagination = pager
     },
-  },
+    onDelete(record) {
+      console.log(record)
+    },
+    openModal(record) {
+      this.modalTitle = record ? '新增' : '编辑'
+      this.visible = true
+    },
+    handleOk() {
+      this.visible = false
+    },
+    handleCancel() {
+      this.visible = false
+    }
+  }
 }
 </script>
-
-<style lang="less" scoped></style>

@@ -1,4 +1,21 @@
-import {Menu,Button, Icon, Layout, Tabs, Tag, Dropdown, message, FormModel, Input, Select} from 'ant-design-vue'
+import {
+  Menu,
+  Button,
+  Icon,
+  Layout,
+  Tabs,
+  Tag,
+  Dropdown,
+  message,
+  FormModel,
+  Input,
+  Select,
+  Table,
+  ConfigProvider,
+  Radio,
+  Popconfirm,
+  Modal
+} from 'ant-design-vue'
 
 export default {
   install(Vue) {
@@ -12,6 +29,11 @@ export default {
     Vue.use(FormModel)
     Vue.use(Input)
     Vue.use(Select)
+    Vue.use(Table)
+    Vue.use(Radio)
+    Vue.use(Popconfirm)
+    Vue.use(ConfigProvider)
+    Vue.use(Modal)
     Vue.prototype.$message = message
   }
 }

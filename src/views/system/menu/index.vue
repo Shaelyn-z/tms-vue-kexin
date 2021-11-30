@@ -88,6 +88,7 @@
 <script>
 import { mapState } from 'vuex'
 import CommonDrawer from '@/components/common/CommonDrawer'
+import menuDataSource from './menu-mock'
 export default {
   data() {
     const columns = [
@@ -135,34 +136,7 @@ export default {
         sort: '',
         remark: ''
       },
-      data: [
-        {
-          name: '用户管理',
-          path: '/system',
-          type: 'menu',
-          icon: 'user',
-          sort: 100,
-          remark: 'transfer',
-          children: [
-            {
-              name: '菜单管理',
-              path: '/system/menu',
-              type: 'subMenu',
-              icon: 'menu',
-              sort: 105,
-              remark: 'transfer'
-            },
-            {
-              name: '角色管理',
-              path: '/system/user',
-              type: 'subMenu',
-              icon: 'menu',
-              sort: 110,
-              remark: 'transfer'
-            }
-          ]
-        }
-      ],
+      data: menuDataSource.list,
       menuOptions: [
         { label: '一级菜单', value: 'menu' },
         { label: '子菜单', value: 'subMenu' }

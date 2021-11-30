@@ -14,7 +14,8 @@ import {
   ConfigProvider,
   Radio,
   Popconfirm,
-  Modal
+  Modal,
+  Drawer,
 } from 'ant-design-vue'
 
 export default {
@@ -34,6 +35,7 @@ export default {
     Vue.use(Popconfirm)
     Vue.use(ConfigProvider)
     Vue.use(Modal)
+    Vue.use(Drawer)
     Vue.prototype.$message = message
   }
 }

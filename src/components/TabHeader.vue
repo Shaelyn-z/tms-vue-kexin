@@ -44,10 +44,12 @@ export default {
     ...mapState('menu', ['openMenuList', 'currMenu'])
   },
   mounted() {
-    document.documentElement.onclick = () => (this.visible = false)
+    document.documentElement.onclick = () => {
+      this.visible = false
+    }
   },
   methods: {
-    ...mapMutations('menu', ['deleteOpenMenu', 'setCurrMenu']),
+    ...mapMutations('menu', ['deleteOpenMenu']),
     /**
      * @description 打开右键菜单
      * @param {*} e 右键元素
@@ -64,7 +66,6 @@ export default {
      * @param {*} menu 菜单项
      */
     openThisMenu(menu) {
-      this.setCurrMenu(menu)
       this.$router.push({ path: menu.path })
     },
     /**
@@ -90,6 +91,9 @@ export default {
       this.deleteOpenMenu(Object.assign({ type }, this.clickContextTab))
       this.$router.push({ path: this.clickContextTab.path })
     }
+  },
+  beforeDestroy() {
+    document.removeEventListener('click')
   }
 }
 </script>

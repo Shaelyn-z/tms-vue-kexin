@@ -19,6 +19,7 @@
 import LeftMenu from '@/components/LeftMenu'
 import TopHeader from '@/components/TopHeader'
 import TabHeader from '@/components/TabHeader'
+import { mapMutations } from 'vuex'
 export default {
   name: 'Index',
   components: {
@@ -30,6 +31,21 @@ export default {
     return {
       menuCollapsed: false
     }
+  },
+  watch: {
+    /**
+     * @description 监听路由的变更，把当前菜单存放在store中
+     * @param {*} to 目的路由地址的相关字段
+     */
+    $route(to) {
+      this.setCurrMenu({
+        path: to.path,
+        pathList: to.matched.map((item) => item.path)
+      })
+    }
+  },
+  methods: {
+    ...mapMutations('menu', ['setCurrMenu'])
   }
 }
 </script>

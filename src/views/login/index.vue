@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import routeList from '@/router/router-mock'
 // import jsEncrypt from 'jsencrypt'
 import Cookies from 'js-cookie'
@@ -63,6 +63,9 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState('menu', ['currMenu'])
+  },
   methods: {
     ...mapMutations('menu', ['setAllMenuList']),
     // 提交登录表单，发起登录
@@ -75,7 +78,7 @@ export default {
           this.setAllMenuList(routeList)
           Cookies.set('cookie', encryptPublicKey)
           setTimeout(() => {
-            this.$router.push('/index')
+            this.$router.push(this.currMenu.path || '/index')
           }, 1000)
           // this.$api('login', data).then((res) => {
           //   if (res.data.code === 200) {

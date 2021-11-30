@@ -6,38 +6,35 @@ export const constantRouterMap = [
     children: [
       {
         path: '/index',
-        component: () => import ('@/views/indexPage'),
-        meta: {
-          title: '首页'
-        }
-      },
-    ]
-  }, {
-    path: '/system',
-    component: () => import ('@/views/Layout'),
-    meta: {
-      title: '系统管理'
-    },
-    children: [
-      {
-        path: '/system/menu',
-        component: () => import ('@/views/system/menu'),
-        meta: {
-          title: '菜单管理'
-        }
-      }, {
-        path: '/system/role',
-        component: () => import ('@/views/system/role'),
-        meta: {
-          title: '角色管理'
-        }
+        component: () => import ('@/views/indexPage')
       },
     ]
   }, {
     path: '/login',
-    component: () => import ('@/views/login'),
-    meta: {
-      title: '登录'
-    }
+    component: () => import ('@/views/login')
+  }, {
+    path: '/system',
+    component: () => import ('@/views/Layout'),
+    children: [
+      {
+        path: '/system/menu',
+        component: () => import ('@/views/system/menu'),
+      }, {
+        path: '/system/role',
+        component: () => import ('@/views/system/role'),
+      },
+    ]
+  }, {
+    path: '/basicInfo',
+    component: () => import ('@/views/Layout'),
+    children: [
+      {
+        path: '/basicInfo/merchantManage',
+        component: () => import ('@/views/basicInfo/merchantManage')
+      }, {
+        path: '/basicInfo/carManage',
+        component: () => import ('@/views/basicInfo/carManage')
+      },
+    ]
   },
 ]

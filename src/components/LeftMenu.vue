@@ -8,11 +8,11 @@
     @click="handleClick"
     mode="inline"
   >
-    <a-menu-item key="/index">
-      <a-icon type="home" />
-      <span>首页</span>
+    <a-menu-item :key="menu.path" v-for="menu in menuList">
+      <a-icon :type="menu.icon" />
+      <span>{{ menu.name }}</span>
     </a-menu-item>
-    <a-sub-menu :key="menu.path" v-for="menu in allMenuList">
+    <a-sub-menu :key="menu.path" v-for="menu in subMenuList">
       <span slot="title">
         <a-icon :type="menu.icon" /><span>{{ menu.name }}</span>
       </span>
@@ -42,7 +42,13 @@ export default {
     }
   },
   computed: {
-    ...mapState('menu', ['allMenuList', 'currMenu'])
+    ...mapState('menu', ['allMenuList', 'currMenu']),
+    menuList() {
+      return this.allMenuList.filter((item) => !item.children)
+    },
+    subMenuList() {
+      return this.allMenuList.filter((item) => item.children)
+    }
   },
   methods: {
     ...mapMutations('menu', ['setCurrMenu', 'addOpenMenu']),

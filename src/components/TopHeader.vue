@@ -86,7 +86,7 @@ export default {
     },
     logout() {
       clearStore()
-      window.location.href = '/#/login'
+      this.$router.replace('/login')
     },
     handleChange(menu) {
       this.$createTab(menu)

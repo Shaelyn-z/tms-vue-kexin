@@ -1,3 +1,5 @@
+import Cookies from "js-cookie"
+import Store from "@/store"
 /**
  * @description 获取浏览器本地存储值
  * @param {*} name 键名
@@ -33,5 +35,6 @@ export function setStore(name, value) {
  * @description 清空缓存
 */
 export function clearStore() {
-  localStorage.clear()
+  Store.commit('menu/clearAll')
+  Cookies.remove('cookie')
 }

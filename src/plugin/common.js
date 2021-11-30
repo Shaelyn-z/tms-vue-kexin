@@ -7,7 +7,6 @@
 export default {
   install(Vue) {
     Vue.prototype.$createTab = function ({path, name, pathList = [], closable = true}) {
-      this.$store.commit('menu/setCurrMenu', {path, pathList})
       this.$store.commit('menu/addOpenMenu', {path, name, pathList, closable})
       this.$router.push({path})
     }

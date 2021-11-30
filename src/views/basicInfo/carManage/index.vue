@@ -1,11 +1,9 @@
 <template>
-  <router-view />
+  <div>车辆管理n</div>
 </template>
 
 <script>
-export default {
-  name: 'system',
-}
+export default {}
 </script>
 
 <style></style>

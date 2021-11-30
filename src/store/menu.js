@@ -62,6 +62,15 @@ export default {
     setCurrMenu: (state, payload) => {
       state.currMenu = payload
       setStore('currMenu', payload)
+    },
+    // 清除所有数据
+    clearAll: state => {
+      state.allMenuList = []
+      state.openMenuList = [{path:"/index",name:"首页",closable:false}]
+      state.currMenu = {path:"/index",name:"首页"}
+      setStore('allMenuList', state.allMenuList)
+      setStore('openMenuList', state.openMenuList)
+      setStore('currMenu', state.currMenu)
     }
   }
 }

@@ -16,6 +16,7 @@ import {
   Popconfirm,
   Modal,
   Drawer,
+  DatePicker
 } from 'ant-design-vue'
 
 export default {
@@ -36,6 +37,7 @@ export default {
     Vue.use(ConfigProvider)
     Vue.use(Modal)
     Vue.use(Drawer)
+    Vue.use(DatePicker)
     Vue.prototype.$message = message
   }
 }

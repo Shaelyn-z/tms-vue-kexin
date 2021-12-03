@@ -1,14 +1,16 @@
 <template>
   <div class="container">
-    <a-form-model layout="inline" :model="formInline">
-      <a-form-model-item label="菜单名称">
-        <a-input v-model="formInline.menuName"></a-input>
-      </a-form-model-item>
-      <a-form-model-item>
-        <a-button type="primary" @click="queryByForm"> 查询 </a-button>
-      </a-form-model-item>
-    </a-form-model>
-    <div class="table-operator">
+    <div ref="searchForm" id="searchForm">
+      <a-form-model layout="inline" :model="formInline">
+        <a-form-model-item label="菜单名称">
+          <a-input v-model="formInline.menuName"></a-input>
+        </a-form-model-item>
+        <a-form-model-item>
+          <a-button type="primary" @click="queryByForm"> 查询 </a-button>
+        </a-form-model-item>
+      </a-form-model>
+    </div>
+    <div ref="tableOperator" class="table-operator">
       <a-button icon="plus" type="primary" @click="openDrawer()">新增</a-button>
     </div>
     <a-table
@@ -17,8 +19,9 @@
       :data-source="data"
       :pagination="pagination"
       :loading="loading"
-      @change="handleTableChange"
+      @change="handlePaginationChange"
       size="middle"
+      :scroll="tableScroll"
       bordered
     >
       <template slot="type" slot-scope="record">
@@ -87,40 +90,47 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import CommonDrawer from '@/components/common/CommonDrawer'
-import menuDataSource from './menu-mock'
+import menuDataSource from './menuMock'
+import tableMixin from '@/mixins/tableMixin'
 export default {
   data() {
     const columns = [
       {
         title: '菜单名称',
-        dataIndex: 'name'
+        dataIndex: 'name',
+        width: 180
       },
       {
         title: '菜单路由',
-        dataIndex: 'path'
+        dataIndex: 'path',
+        width: 150
       },
       {
         title: '菜单类型',
         dataIndex: 'type',
-        scopedSlots: { customRender: 'type' }
+        scopedSlots: { customRender: 'type' },
+        width: 150
       },
       {
         title: '菜单图标',
         dataIndex: 'icon',
-        scopedSlots: { customRender: 'icon' }
+        scopedSlots: { customRender: 'icon' },
+        width: 150
       },
       {
         title: '排序',
-        dataIndex: 'sort'
+        dataIndex: 'sort',
+        width: 150
       },
       {
         title: '备注',
-        dataIndex: 'remark'
+        dataIndex: 'remark',
+        width: 150
       },
       {
         title: '操作',
-        scopedSlots: { customRender: 'operation' }
+        scopedSlots: { customRender: 'operation' },
+        width: 150
       }
     ]
     return {
@@ -163,7 +173,7 @@ export default {
         .map((item) => ({ name: item.name, path: item.path }))
     }
   },
-  components: { CommonDrawer },
+  mixins: [tableMixin],
   methods: {
     /**
      * @description 根据查询表单过滤菜单数据

@@ -64,19 +64,20 @@
         <a href="javascript:;" @click="openFormModal(record)">&nbsp;编辑</a>
       </template>
     </a-table>
-    <common-form-modal
+    <merchant-modal
       :title="modalTitle"
       :visible.sync="visible"
       :formColumns="columns.filter((item) => item.editOption)"
       :formData="editFormData"
       label-width="120px"
-    ></common-form-modal>
+    ></merchant-modal>
   </div>
 </template>
 <script>
 import dataSource from './merchantMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
+import merchantModal from './merchantModal.vue'
 export default {
   data() {
     return {
@@ -93,6 +94,7 @@ export default {
       columns: tableColumn
     }
   },
+  components: { merchantModal },
   mixins: [tableMixin],
   computed: {},
   methods: {

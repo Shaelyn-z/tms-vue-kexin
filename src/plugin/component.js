@@ -6,12 +6,10 @@
 */
 import CommonDictSelect from '@/components/common/CommonDictSelect'
 import CommonDrawer from '@/components/common/CommonDrawer'
-import CommonFormModal from '@/components/common/CommonFormModal'
 
 export default {
   install(Vue) {
     Vue.component('common-dict-select', CommonDictSelect)
     Vue.component('common-drawer', CommonDrawer)
-    Vue.component('common-form-modal', CommonFormModal)
   }
 }

@@ -7,67 +7,103 @@
       :rules="rules"
       layout="inline"
     >
-      <a-form-model-item label="客商类型" prop="custType">
+      基本信息
+      <a-form-model-item label="车辆类型" prop="custType">
         <common-dict-select
           v-model="formInline.custType"
           dictCode="custType"
         ></common-dict-select>
       </a-form-model-item>
-      <a-form-model-item label="客商编码" prop="code">
+      <a-form-model-item label="车牌号" prop="code">
         <a-input v-model="formInline.code"></a-input>
       </a-form-model-item>
-      <a-form-model-item label="客商名称" prop="cname">
+      <a-form-model-item label="隶属运营商">
         <a-input v-model="formInline.cname"></a-input>
       </a-form-model-item>
-      <a-form-model-item label="客商简称" prop="shortname">
+      <a-form-model-item label="使用性质">
         <a-input v-model="formInline.shortname"></a-input>
       </a-form-model-item>
-      <a-form-model-item label="外文名称">
+      <a-form-model-item label="车架号">
         <a-input v-model="formInline.custName"></a-input>
       </a-form-model-item>
-      <a-form-model-item label="所属行业" prop="industryName">
+      <a-form-model-item label="发动机号">
         <a-input v-model="formInline.industryName"></a-input>
       </a-form-model-item>
-      <a-form-model-item label="所属地区" prop="areaName">
+      <a-form-model-item label="注册日期">
         <a-input v-model="formInline.areaName"></a-input>
       </a-form-model-item>
-      <a-form-model-item label="注册资金(万元)">
+      <a-form-model-item label="发证日期">
         <a-input v-model="formInline.registFund"></a-input>
       </a-form-model-item>
-      <a-form-model-item label="专管业务员">
+      <a-form-model-item label="档案编号">
         <a-input v-model="formInline.salemanName"></a-input>
       </a-form-model-item>
-      <a-form-model-item label="信用额度">
+      <a-form-model-item label="核定载人数">
         <a-input v-model="formInline.creditLine"></a-input>
       </a-form-model-item>
-      <a-form-model-item label="是否冻结">
+      <a-form-model-item label="外形尺寸">
         <a-input v-model="formInline.isUse" />
       </a-form-model-item>
-      <a-form-model-item label="冻结日期">
+      <a-form-model-item label="所有人">
         <a-date-picker v-model="formInline.freezingDate" />
       </a-form-model-item>
-      <a-form-model-item label="审核状态">
+      <a-form-model-item label="住址">
         <a-input v-model="formInline.status"></a-input>
       </a-form-model-item>
-      <a-form-model-item label="运费系数">
+      <a-form-model-item label="总质量(KG)" prop="">
         <a-input v-model="formInline.xishu"></a-input>
       </a-form-model-item>
-      <a-form-model-item label="联系人1">
+      <a-form-model-item label="整备质量(KG)" prop="">
         <a-input v-model="formInline.contactman" />
       </a-form-model-item>
-      <a-form-model-item label="联系人2">
+      <a-form-model-item label="核定载质量(KG)">
         <a-input v-model="formInline.contactman2" />
       </a-form-model-item>
-      <a-form-model-item label="联系电话1">
+      <a-form-model-item label="准牵引质量(KG)">
         <a-input v-model="formInline.contactPhone" />
       </a-form-model-item>
-      <a-form-model-item label="联系电话2">
+      <a-form-model-item label="总里程(KM)">
         <a-input v-model="formInline.contactPhone2" />
       </a-form-model-item>
-      <a-form-model-item label="地址1">
+      <a-form-model-item label="检验有效期截止日期" prop="">
         <a-input v-model="formInline.contactAddr" />
       </a-form-model-item>
-      <a-form-model-item label="地址2">
+      <a-form-model-item label="强制报废截止日期" prop="">
+        <a-input v-model="formInline.contactAddr2" />
+      </a-form-model-item>
+      <a-form-model-item label="行驶证主页正面图片">
+        <a-input v-model="formInline.contactAddr2" />
+      </a-form-model-item>
+      <a-form-model-item label="行驶证主页反面图片">
+        <a-input v-model="formInline.contactAddr2" />
+      </a-form-model-item>
+      <a-form-model-item label="行驶证副页正面图片">
+        <a-input v-model="formInline.contactAddr2" />
+      </a-form-model-item>
+      <a-form-model-item label="行驶证副页反面图片">
+        <a-input v-model="formInline.contactAddr2" />
+      </a-form-model-item>
+      运输信息
+      <a-form-model-item label="运输证证号">
+        <a-input v-model="formInline.contactAddr2" />
+      </a-form-model-item>
+      <a-form-model-item label="业户名称">
+        <a-input v-model="formInline.contactAddr2" />
+      </a-form-model-item>
+      <a-form-model-item label="发证日期">
+        <a-input v-model="formInline.contactAddr2" />
+      </a-form-model-item>
+      <a-form-model-item label="审验有效期截止日期">
+        <a-input v-model="formInline.contactAddr2" />
+      </a-form-model-item>
+      <a-form-model-item label="经营范围">
+        <a-input v-model="formInline.contactAddr2" />
+      </a-form-model-item>
+      保险信息
+      <a-form-model-item label="保险有效时间段">
+        <a-input v-model="formInline.contactAddr2" />
+      </a-form-model-item>
+      <a-form-model-item label="保险信息图片">
         <a-input v-model="formInline.contactAddr2" />
       </a-form-model-item>
     </a-form-model>

@@ -1,13 +1,27 @@
 // 是否
 export const yesOrNo = [
+    {
+      value: 1,
+      text: '是'
+    }, {
+      value: 0,
+      text: '否'
+    },
+  ]
+
+// 车辆类型
+export const vehicleType = [
   {
     value: 1,
-    text: '是'
+    text: "车头",
+    color: '#077621'
   }, {
-    value: 0,
-    text: '否'
-  },
+    value: 2,
+    text: "车挂",
+    color: '#760d27'
+  }
 ]
+    
 // 客商类型
 export const custType = [
   {
@@ -35,7 +49,8 @@ export const custType = [
 
 const DictMap = {
   yesOrNo,
-  custType
+  custType,
+  vehicleType
 }
 
 export default DictMap

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import DictMap from '@/static/dict'
+import DictMap from '@/static/js/dict'
 export default {
   name: 'CommonDictSelect',
   data() {

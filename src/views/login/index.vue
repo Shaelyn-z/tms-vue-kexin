@@ -28,7 +28,7 @@
           <a-icon slot="prefix" type="lock" />
         </a-input>
       </a-form-model-item>
-      <a-form-model-item :wrapper-col="{ span: 18 }">
+      <a-form-model-item>
         <a-button
           type="primary"
           @click="submitForm('loginForm')"
@@ -38,6 +38,8 @@
         </a-button>
       </a-form-model-item>
     </a-form-model>
+
+    <span class="copyright">Copyright© 广州市科信软件开发有限公司版权所有</span>
   </div>
 </template>
 <script>
@@ -45,7 +47,7 @@ import { mapMutations, mapState } from 'vuex'
 import routeList from '@/router/router-mock'
 // import jsEncrypt from 'jsencrypt'
 import Cookies from 'js-cookie'
-import { encryptPublicKey } from '@/static/constants'
+import { encryptPublicKey } from '@/static/js/constants'
 export default {
   data() {
     return {
@@ -58,8 +60,7 @@ export default {
         pass: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       },
       layout: {
-        labelCol: { span: 4 },
-        wrapperCol: { span: 18 }
+        wrapperCol: { span: 24 }
       }
     }
   },
@@ -105,10 +106,14 @@ export default {
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  flex-direction: column;
   .login-form {
-    width: 400px;
-    height: 300px;
+    width: 300px;
+    height: 600px;
+  }
+  .copyright {
+    height: 30px;
   }
 }
 </style>

@@ -6,19 +6,22 @@
     showSearch
     :filterOption="filterOption"
   >
-    <a-select-option v-for="item in DictMap[dictCode]" :key="item.value">
+    <a-select-option
+      v-for="item in Object.values(constantsExt[dictCode])"
+      :key="item.value"
+    >
       {{ item.text }}
     </a-select-option>
   </a-select>
 </template>
 
 <script>
-import DictMap from '@/static/js/dict'
+import constantsExt from '@/static/js/constantsExt'
 export default {
   name: 'CommonDictSelect',
   data() {
     return {
-      DictMap
+      constantsExt
     }
   },
   model: {

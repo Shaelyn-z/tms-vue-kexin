@@ -15,6 +15,22 @@ export default {
         total: 0
       },
       tableScroll: {x: true, y: 500},
+      rowSelection: {
+        columnWidth: 50,
+        onChange: (selectedRowKeys, selectedRows) => {
+          console.log(
+            `selectedRowKeys: ${selectedRowKeys}`,
+            'selectedRows: ',
+            selectedRows
+          )
+        },
+        onSelect: (record, selected, selectedRows) => {
+          console.log(record, selected, selectedRows)
+        },
+        onSelectAll: (selected, selectedRows, changeRows) => {
+          console.log(selected, selectedRows, changeRows)
+        }
+      }
     }
   },
   computed: {},

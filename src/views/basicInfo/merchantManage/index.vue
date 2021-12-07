@@ -35,9 +35,9 @@
       <a-button icon="check" type="primary" @click="openFormModal()">
         审核
       </a-button>
-      <a-button icon="left" type="primary" @click="openFormModal()"
-        >弃审</a-button
-      >
+      <a-button icon="left" type="primary" @click="openFormModal()">
+        弃审
+      </a-button>
     </div>
     <a-table
       :columns="columns"
@@ -58,16 +58,16 @@
         />
       </template>
       <template slot="operation" slot-scope="record">
+        <a href="javascript:;" @click="openFormModal(record)">编辑</a>
+        &nbsp;&nbsp;
         <a-popconfirm title="确定删除吗？" @confirm="() => onDelete(record)">
-          <a href="javascript:;">删除</a>
+          <a href="javascript:;" type="danger">删除</a>
         </a-popconfirm>
-        <a href="javascript:;" @click="openFormModal(record)">&nbsp;编辑</a>
       </template>
     </a-table>
     <merchant-modal
       :title="modalTitle"
       :visible.sync="visible"
-      :formColumns="columns.filter((item) => item.editOption)"
       :formData="editFormData"
       label-width="120px"
     ></merchant-modal>

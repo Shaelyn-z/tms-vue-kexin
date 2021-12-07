@@ -6,10 +6,12 @@
 */
 import CommonDictSelect from '@/components/common/CommonDictSelect'
 import CommonDrawer from '@/components/common/CommonDrawer'
+import CommonPictUpload from '@/components/common/CommonPictUpload'
 
 export default {
   install(Vue) {
     Vue.component('common-dict-select', CommonDictSelect)
     Vue.component('common-drawer', CommonDrawer)
+    Vue.component('common-pict-upload', CommonPictUpload)
   }
 }

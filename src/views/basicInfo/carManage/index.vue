@@ -22,6 +22,7 @@
         </a-form-model-item>
         <a-form-model-item>
           <a-button type="primary" @click="queryByForm"> 查询 </a-button>
+          <a-button type="primary" @click="queryByForm"> 重置 </a-button>
         </a-form-model-item>
       </a-form-model>
     </div>
@@ -55,38 +56,38 @@
       :pagination="pagination"
       :loading="loading"
       @change="handlePaginationChange"
+      :row-selection="rowSelection"
       size="middle"
       :scroll="tableScroll"
       bordered
     >
-      <template slot="isUse" slot-scope="isUse">
+      <template slot="isGps" slot-scope="isGps">
         <a-switch
-          checked-children="是"
-          un-checked-children="否"
-          :checked="isUse === 1"
+          checked-children="启用"
+          un-checked-children="禁用"
+          :checked="isGps === 1"
         />
       </template>
       <template slot="operation" slot-scope="record">
+        <a href="javascript:;" @click="openFormModal(record)">编辑</a>
+        &nbsp;&nbsp;
         <a-popconfirm title="确定删除吗？" @confirm="() => onDelete(record)">
-          <a href="javascript:;">删除</a>
+          <a href="javascript:;" type="danger">删除</a>
         </a-popconfirm>
-        <a href="javascript:;" @click="openFormModal(record)">&nbsp;编辑</a>
       </template>
     </a-table>
-    <merchant-modal
+    <car-modal
       :title="modalTitle"
       :visible.sync="visible"
-      :formColumns="columns.filter((item) => item.editOption)"
       :formData="editFormData"
-      label-width="120px"
-    ></merchant-modal>
+    ></car-modal>
   </div>
 </template>
 <script>
 import dataSource from './carMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
-import merchantModal from './carModal.vue'
+import carModal from './carModal.vue'
 export default {
   data() {
     return {
@@ -103,7 +104,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { merchantModal },
+  components: { carModal },
   mixins: [tableMixin],
   computed: {},
   methods: {

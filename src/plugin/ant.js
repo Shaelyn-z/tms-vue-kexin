@@ -18,7 +18,8 @@ import {
   Drawer,
   DatePicker,
   Switch,
-  Popover
+  Popover,
+  Upload
 } from 'ant-design-vue'
 
 export default {
@@ -42,6 +43,7 @@ export default {
     Vue.use(DatePicker)
     Vue.use(Switch)
     Vue.use(Popover)
+    Vue.use(Upload)
     Vue.prototype.$message = message
   }
 }

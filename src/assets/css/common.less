@@ -11,6 +11,14 @@
 .ant-btn + .ant-btn {
   margin-left: 10px;
 }
+.ant-modal-body {
+  padding: 15px;
+}
+
+/* a标签的特殊颜色区分 */
+a[type='danger'] {
+  color: #ff5722;
+}
 
 /* 滚动条优化 start */
 ::-webkit-scrollbar {
@@ -50,8 +58,22 @@
 }
 
 #modalForm {
+  max-height: 70vh;
+  overflow-y: scroll;
+  .sub-form-card {
+    box-shadow: 0px 0px 4px#cdcdcd;
+    margin: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+  }
+  .sub-form-title {
+    font-weight: bold;
+    font-size: 14px;
+    color: black;
+  }
   .ant-form-item {
-    margin: 10px 20px;
+    margin-left: 20px;
+    margin-bottom: 15px;
   }
   .ant-select,
   .ant-input {

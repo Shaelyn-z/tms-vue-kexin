@@ -79,7 +79,7 @@ export default {
           this.setAllMenuList(routeList)
           Cookies.set('cookie', encryptPublicKey)
           setTimeout(() => {
-            this.$router.push(this.currMenu.path || '/index')
+            this.$router.push('/index')
           }, 1000)
           // this.$api('login', data).then((res) => {
           //   if (res.data.code === 200) {

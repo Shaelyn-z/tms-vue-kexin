@@ -1,4 +1,4 @@
-<!-- 客商管理 -->
+<!-- 驾押人员管理 -->
 <template>
   <div class="container">
     <div ref="searchForm" id="searchForm">
@@ -49,7 +49,6 @@
       @change="handlePaginationChange"
       size="middle"
       :scroll="tableScroll"
-      :customRow="customRow"
       bordered
     >
       <template slot="isUse" slot-scope="isUse">
@@ -67,18 +66,18 @@
         </a-popconfirm>
       </template>
     </a-table>
-    <merchant-modal
+    <driver-modal
       :title="modalTitle"
       :visible.sync="visible"
       :formData="editFormData"
-    ></merchant-modal>
+    ></driver-modal>
   </div>
 </template>
 <script>
-import dataSource from './merchantMock'
+import dataSource from './driverMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
-import MerchantModal from './merchantModal.vue'
+import DriverModal from './driverModal.vue'
 export default {
   data() {
     return {
@@ -92,7 +91,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { MerchantModal },
+  components: { DriverModal },
   mixins: [tableMixin],
   computed: {},
   methods: {

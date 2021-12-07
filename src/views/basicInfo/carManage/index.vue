@@ -1,3 +1,4 @@
+<!-- 车辆管理 -->
 <template>
   <div class="container">
     <div ref="searchForm" id="searchForm">
@@ -97,10 +98,8 @@ export default {
         name: '',
         date: []
       },
-      modalTitle: '',
       data: dataSource.list,
       loading: false,
-      visible: false,
       columns: tableColumn
     }
   },
@@ -120,13 +119,6 @@ export default {
      */
     onDelete(record) {
       console.log('删除菜单', record.id)
-    },
-    openFormModal(record) {
-      this.modalTitle = record ? '编辑' : '新增'
-      this.editFormData = record
-        ? Object.assign({ time: +new Date() }, record)
-        : null
-      this.visible = true
     }
   }
 }

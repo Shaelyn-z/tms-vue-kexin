@@ -1,4 +1,4 @@
-<!-- 客商管理 -->
+<!-- 站点管理 -->
 <template>
   <div class="container">
     <div ref="searchForm" id="searchForm">

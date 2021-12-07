@@ -75,7 +75,7 @@
 </template>
 <script>
 export default {
-  name: 'MerchantModal',
+  name: 'DriverModal',
   data() {
     return {
       formInline: {},
@@ -144,7 +144,7 @@ export default {
 
 <style lang="less" scoped>
 #modalForm {
-  /deep/ .ant-form-item-label {
+  .ant-form-item-label {
     width: 140px;
   }
 }

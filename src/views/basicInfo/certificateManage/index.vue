@@ -1,4 +1,4 @@
-<!-- 客商管理 -->
+<!-- 证书管理 -->
 <template>
   <div class="container">
     <div ref="searchForm" id="searchForm">
@@ -27,9 +27,9 @@
       </a-form-model>
     </div>
     <div ref="tableOperator" class="table-operator">
-      <a-button icon="plus" type="primary" @click="openFormModal()"
-        >新增</a-button
-      >
+      <a-button icon="plus" type="primary" @click="openFormModal()">
+        新增
+      </a-button>
       <a-button icon="cloud-upload" type="primary" @click="openFormModal()">
         导入
       </a-button>
@@ -49,7 +49,6 @@
       @change="handlePaginationChange"
       size="middle"
       :scroll="tableScroll"
-      :customRow="customRow"
       bordered
     >
       <template slot="isUse" slot-scope="isUse">
@@ -67,32 +66,35 @@
         </a-popconfirm>
       </template>
     </a-table>
-    <merchant-modal
+    <certificate-modal
       :title="modalTitle"
       :visible.sync="visible"
       :formData="editFormData"
-    ></merchant-modal>
+    ></certificate-modal>
   </div>
 </template>
 <script>
-import dataSource from './merchantMock'
+import dataSource from './certificateMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
-import MerchantModal from './merchantModal.vue'
+import CertificateModal from './certificateModal.vue'
 export default {
   data() {
     return {
+      editFormData: null,
       searchFormData: {
         custType: '',
         name: '',
         date: []
       },
+      modalTitle: '',
       data: dataSource.list,
       loading: false,
+      visible: false,
       columns: tableColumn
     }
   },
-  components: { MerchantModal },
+  components: { CertificateModal },
   mixins: [tableMixin],
   computed: {},
   methods: {
@@ -108,6 +110,13 @@ export default {
      */
     onDelete(record) {
       console.log('删除菜单', record.id)
+    },
+    openFormModal(record) {
+      this.modalTitle = record ? '编辑' : '新增'
+      this.editFormData = record
+        ? Object.assign({ time: +new Date() }, record)
+        : null
+      this.visible = true
     }
   }
 }

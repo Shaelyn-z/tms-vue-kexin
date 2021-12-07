@@ -30,7 +30,10 @@ export default {
         onSelectAll: (selected, selectedRows, changeRows) => {
           console.log(selected, selectedRows, changeRows)
         }
-      }
+      },
+      visible: false, // 新增/编辑弹框是否可见
+      modalTitle: '', // 新增/编辑弹框标题
+      editFormData: null, // 需要传递给编辑弹框的表单数据
     }
   },
   computed: {},
@@ -50,6 +53,31 @@ export default {
      */
     handlePaginationChange(pagination) {
       this.pagination = pagination
+    },
+    /**
+     * @description 定义表格行的相关事件
+     * @param {*} record 行内数据
+    */
+    customRow(record) {
+      return {
+        on: {
+          // 行双击事件，打开编辑弹框
+          dblclick: () => {
+            this.openFormModal(record)
+          },
+        },
+      };
+    },
+    /**
+     * @description 打开新增/编辑弹框
+     * @param {*} record 行内数据
+    */
+    openFormModal(record) {
+      this.modalTitle = record ? '编辑' : '新增'
+      this.editFormData = record
+        ? Object.assign({ time: +new Date() }, record)
+        : null
+      this.visible = true
     }
   }
 }

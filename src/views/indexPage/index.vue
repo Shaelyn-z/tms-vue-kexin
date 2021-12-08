@@ -48,7 +48,7 @@ export default {
     line-height: 30px;
     font-size: 14px;
     padding: 0px 10px;
-    background: #cbcbcb;
+    background: rgb(238, 238, 238);
   }
   .plan-list {
     display: flex;

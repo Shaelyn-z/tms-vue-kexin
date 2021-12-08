@@ -1,5 +1,11 @@
 <template>
-  <a-modal v-model="modalVisible" :title="title" @ok="handleOk" width="70vw">
+  <a-modal
+    v-model="modalVisible"
+    :title="title"
+    @ok="handleOk"
+    width="70vw"
+    centered
+  >
     <a-form-model
       id="modalForm"
       ref="menuForm"

@@ -31,10 +31,10 @@
         <a-icon :type="record" />
       </template>
       <template slot="operation" slot-scope="record">
-        <a href="javascript:;" @click="openDrawer(record)">编辑</a>
+        <a-link @click="openDrawer(record)">编辑</a-link>
         &nbsp;&nbsp;
         <a-popconfirm title="确定删除吗？" @confirm="() => onDelete(record)">
-          <a href="javascript:;" type="danger">删除</a>
+          <a-link type="danger">删除</a-link>
         </a-popconfirm>
       </template>
     </a-table>

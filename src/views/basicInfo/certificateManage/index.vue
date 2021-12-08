@@ -11,10 +11,12 @@
         </a-form-model-item>
         <a-form-model-item>
           <template slot="label">
-            <a-popover>
-              <template slot="content"> 输入关键字进行搜索 </template>
+            <a-tooltip placement="right">
+              <template slot="title">
+                可输入姓名 隶属运营商 手机号 身份证号 发证机关查询
+              </template>
               关键字&nbsp;<a-icon type="question-circle" />
-            </a-popover>
+            </a-tooltip>
           </template>
           <a-input v-model="searchFormData.name"></a-input>
         </a-form-model-item>
@@ -30,15 +32,6 @@
       <a-button icon="plus" type="primary" @click="openFormModal()">
         新增
       </a-button>
-      <a-button icon="cloud-upload" type="primary" @click="openFormModal()">
-        导入
-      </a-button>
-      <a-button icon="check" type="primary" @click="openFormModal()">
-        审核
-      </a-button>
-      <a-button icon="left" type="primary" @click="openFormModal()">
-        弃审
-      </a-button>
     </div>
     <a-table
       :columns="columns"
@@ -49,6 +42,7 @@
       @change="handlePaginationChange"
       size="middle"
       :scroll="tableScroll"
+      :rowSelection="rowSelection"
       bordered
     >
       <template slot="isUse" slot-scope="isUse">
@@ -59,10 +53,10 @@
         />
       </template>
       <template slot="operation" slot-scope="record">
-        <a href="javascript:;" @click="openFormModal(record)">编辑</a>
+        <a-link @click="openFormModal(record)">编辑</a-link>
         &nbsp;&nbsp;
         <a-popconfirm title="确定删除吗？" @confirm="onDelete(record)">
-          <a href="javascript:;" type="danger">删除</a>
+          <a-link type="danger">删除</a-link>
         </a-popconfirm>
       </template>
     </a-table>

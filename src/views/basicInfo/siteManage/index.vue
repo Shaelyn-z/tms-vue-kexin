@@ -3,20 +3,22 @@
   <div class="container">
     <div ref="searchForm" id="searchForm">
       <a-form-model layout="inline" :model="searchFormData">
-        <a-form-model-item label="客商类型">
+        <a-form-model-item>
+          <template slot="label">
+            <a-tooltip placement="right">
+              <template slot="title">
+                可输入地点编码 地点名称 地点类型 省 市查询
+              </template>
+              关键字&nbsp;<a-icon type="question-circle" />
+            </a-tooltip>
+          </template>
+          <a-input v-model="searchFormData.name"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="站点等级">
           <common-dict-select
             v-model="searchFormData.custType"
             dictCode="custType"
           ></common-dict-select>
-        </a-form-model-item>
-        <a-form-model-item>
-          <template slot="label">
-            <a-popover>
-              <template slot="content"> 输入关键字进行搜索 </template>
-              关键字&nbsp;<a-icon type="question-circle" />
-            </a-popover>
-          </template>
-          <a-input v-model="searchFormData.name"></a-input>
         </a-form-model-item>
         <a-form-model-item label="录入时间">
           <a-range-picker v-model="searchFormData.date"> </a-range-picker>
@@ -27,17 +29,17 @@
       </a-form-model>
     </div>
     <div ref="tableOperator" class="table-operator">
-      <a-button icon="plus" type="primary" @click="openFormModal()"
-        >新增</a-button
-      >
+      <a-button icon="plus" type="primary" @click="openFormModal()">
+        新增
+      </a-button>
       <a-button icon="cloud-upload" type="primary" @click="openFormModal()">
         导入
       </a-button>
-      <a-button icon="check" type="primary" @click="openFormModal()">
-        审核
+      <a-button icon="reload" type="primary" @click="openFormModal()">
+        更新围栏
       </a-button>
-      <a-button icon="left" type="primary" @click="openFormModal()">
-        弃审
+      <a-button icon="delete" type="primary" @click="openFormModal()">
+        删除围栏
       </a-button>
     </div>
     <a-table
@@ -60,10 +62,10 @@
         />
       </template>
       <template slot="operation" slot-scope="record">
-        <a href="javascript:;" @click="openFormModal(record)">编辑</a>
+        <a-link @click="openFormModal(record)">编辑</a-link>
         &nbsp;&nbsp;
         <a-popconfirm title="确定删除吗？" @confirm="onDelete(record)">
-          <a href="javascript:;" type="danger">删除</a>
+          <a-link type="danger">删除</a-link>
         </a-popconfirm>
       </template>
     </a-table>

@@ -47,7 +47,13 @@ export default {
     })
 
   },
-  methods: { 
+  methods: {
+    /**
+     * @description 重置搜索表单
+    */
+    resetForm() {
+      this.$refs.searchFormModel.resetFields()
+    }, 
     /**
      * @description 监听表格组件中分页组件的改变
      */

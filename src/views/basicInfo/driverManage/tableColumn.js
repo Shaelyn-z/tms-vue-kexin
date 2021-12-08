@@ -1,3 +1,4 @@
+import { renderCellByDict } from '@/assets/js/formatter'
 const tableColumns = [
   {
     title: '序号',
@@ -7,164 +8,92 @@ const tableColumns = [
     customRender: (text, record, index) => index + 1
   },
   {
-    title: '客商类型',
-    dataIndex: 'custType',
+    title: '人员类别',
+    dataIndex: 'personnelType',
     width: 100,
-    fixed: 'left',
-    editOption: {
-      required: true,
-      type: 'select',
-      dict: 'custType'
+    customRender: value => {
+      return renderCellByDict('personnelType', value)
     }
   },
   {
-    title: '客商编码',
-    dataIndex: 'code',
-    width: 100,
-    fixed: 'left',
-    editOption: {
-      required: true,
-      type: 'input'
-    }
+    title: '姓名',
+    dataIndex: 'name',
+    width: 100
   },
   {
-    title: '客商名称',
-    dataIndex: 'cname',
-    width: 200,
-    editOption: {
-      required: true,
-      type: 'input'
-    }
-  }, {
-    title: '客商简称',
-    dataIndex: 'shortname',
-    width: 100,
-    editOption: {
-      required: true,
-      type: 'input'
-    }
-  }, {
-    title: '外文名称',
-    dataIndex: 'custName',
-    width: 100,
-    editOption: {
-      required: true,
-      type: 'input'
-    }
-  }, {
-    title: '审核状态',
-    dataIndex: 'status',
-    width: 100,
-    editOption: {
-      required: true,
-      type: 'input'
-    }
-  }, {
+    title: '是否禁用',
     dataIndex: 'isUse',
-    title: '是否冻结',
     width: 100,
     scopedSlots: {
       customRender: 'isUse'
-    },
-    editOption: {
-      required: true,
-      type: 'select',
-      dict: 'yesOrNo'
     }
   }, {
+    title: '性别',
+    dataIndex: 'shortname',
+    width: 100
+  }, {
+    title: '隶属营运商',
+    dataIndex: 'custName',
+    width: 100
+  }, {
+    title: '手机号',
+    dataIndex: 'status',
+    width: 100
+  }, {
+    title: '身份证号',
+    dataIndex: 'id',
+    width: 100,
+  }, {
+    title: '出生日期',
     dataIndex: 'industryName',
-    title: '所属行业',
-    sorter: (a, b) => a.industryName - b.industryName,
-    width: 120,
-    editOption: {
-      required: true,
-      type: 'input'
-    }
+    width: 120
   }, {
+    title: '发证机关',
     dataIndex: 'areaName',
-    title: '所属地区',
-    width: 120,
-    sorter: (a, b) => a.areaName - b.areaName,
-    editOption: {
-      required: true,
-      type: 'input'
-    }
+    width: 120
   }, {
+    title: '身份证住址',
     dataIndex: 'registFund',
-    title: '注册资金(万元)',
-    sorter: (a, b) => a.registFund - b.registFund,
-    width: 140,
-    editOption: {
-      required: true,
-      type: 'input'
-    }
+    width: 150
   }, {
+    title: '身份证有效期截止日期',
     dataIndex: 'salemanName',
-    title: '专管业务员',
+    width: 200
+  }, {
+    title: '状态',
+    dataIndex: 'state',
     width: 100,
-    editOption: {
-      required: true,
-      type: 'input'
+    customRender: value => {
+      return renderCellByDict('basicDriverState', value)
     }
   }, {
-    dataIndex: 'creditLine',
-    title: '信用额度',
-    width: 100,
-    editOption: {
-      required: true,
-      type: 'input'
-    }
-  }, {
+    title: '审核状态',
     dataIndex: 'freezingDate',
-    title: '冻结日期',
-    width: 200,
-    editOption: {
-      required: true,
-      type: 'dateRange',
-      defaultValue: []
-    }
+    width: 100
   }, {
+    title: '从业资格证件号',
     dataIndex: 'contactman',
-    title: '联系人1',
-    width: 100,
-    editOption: {
-      type: 'input'
-    }
+    width: 150
   }, {
-    dataIndex: 'contactman2',
-    title: '联系人2',
-    width: 100,
-    editOption: {
-      type: 'input'
-    }
+    dataIndex: 'contacttype',
+    title: '从业资格类别',
+    width: 150
   }, {
+    title: '从业资格证发证机关',
     dataIndex: 'contactPhone',
-    title: '联系电话1',
-    width: 100,
-    editOption: {
-      type: 'input'
-    }
+    width: 150
   }, {
+    title: '从业资格证初次发证时间',
     dataIndex: 'contactPhone2',
-    title: '联系电话2',
-    width: 100,
-    editOption: {
-      type: 'input'
-    }
+    width: 200
   }, {
+    title: '从业资格证有效截止日期',
     dataIndex: 'contactAddr',
-    title: '地址1',
-    width: 100,
-    editOption: {
-      type: 'input'
-    }
+    width: 200
   }, {
+    title: '驾驶证有效期',
     dataIndex: 'contactAddr2',
-    title: '地址2',
-    width: 100,
-    editOption: {
-      type: 'input'
-    }
+    width: 150
   }, {
     title: '操作',
     scopedSlots: {

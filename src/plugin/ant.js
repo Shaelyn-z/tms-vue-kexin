@@ -20,7 +20,8 @@ import {
   Switch,
   Popover,
   Upload,
-  Result
+  Result,
+  Tooltip
 } from 'ant-design-vue'
 
 export default {
@@ -46,6 +47,7 @@ export default {
     Vue.use(Popover)
     Vue.use(Upload)
     Vue.use(Result)
+    Vue.use(Tooltip)
     Vue.prototype.$message = message
   }
 }

@@ -14,6 +14,9 @@ const vm = new Vue()
  * @param {*} value 单元格value值
 */
 export function renderCellByDict(dictCode, value) {
+  if (!value && value !== 0) {
+    return ''
+  }
   // map格式转换 {key: {value, text, color}} --> {value: {value, text, color}}
   const valueMap = Object.values(DictMap[dictCode]).reduce((pre, cur) => {
     pre[cur.value] = cur

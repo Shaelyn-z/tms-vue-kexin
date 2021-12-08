@@ -11,10 +11,12 @@
         </a-form-model-item>
         <a-form-model-item>
           <template slot="label">
-            <a-popover>
-              <template slot="content"> 输入关键字进行搜索 </template>
+            <a-tooltip placement="right">
+              <template slot="title">
+                可输入姓名 隶属运营商 手机号 身份证号 发证机关查询
+              </template>
               关键字&nbsp;<a-icon type="question-circle" />
-            </a-popover>
+            </a-tooltip>
           </template>
           <a-input v-model="searchFormData.name"></a-input>
         </a-form-model-item>
@@ -51,16 +53,16 @@
       </a-button>
     </div>
     <a-table
-      :columns="columns"
+      bordered
       row-key="id"
-      :data-source="data"
-      :pagination="pagination"
+      size="middle"
       :loading="loading"
+      :columns="columns"
+      :data-source="data"
+      :scroll="tableScroll"
+      :pagination="pagination"
       @change="handlePaginationChange"
       :row-selection="rowSelection"
-      size="middle"
-      :scroll="tableScroll"
-      bordered
     >
       <template slot="isGps" slot-scope="isGps">
         <a-switch
@@ -70,10 +72,10 @@
         />
       </template>
       <template slot="operation" slot-scope="record">
-        <a href="javascript:;" @click="openFormModal(record)">编辑</a>
+        <a-link @click="openFormModal(record)">编辑</a-link>
         &nbsp;&nbsp;
         <a-popconfirm title="确定删除吗？" @confirm="() => onDelete(record)">
-          <a href="javascript:;" type="danger">删除</a>
+          <a-link type="danger">删除</a-link>
         </a-popconfirm>
       </template>
     </a-table>

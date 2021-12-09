@@ -1,15 +1,19 @@
-<!-- 车辆管理 -->
+<!-- 驾押人员管理 -->
 <template>
   <div class="container">
     <div ref="searchForm" id="searchForm">
-      <a-form-model layout="inline" :model="searchFormData">
-        <a-form-model-item label="客商类型">
+      <a-form-model
+        ref="searchFormModel"
+        layout="inline"
+        :model="searchFormData"
+      >
+        <a-form-model-item label="人员类别" prop="custType">
           <common-dict-select
             v-model="searchFormData.custType"
-            dictCode="custType"
+            dictCode="personnelType"
           ></common-dict-select>
         </a-form-model-item>
-        <a-form-model-item>
+        <a-form-model-item prop="keywords">
           <template slot="label">
             <a-tooltip placement="right">
               <template slot="title">
@@ -18,14 +22,20 @@
               关键字&nbsp;<a-icon type="question-circle" />
             </a-tooltip>
           </template>
-          <a-input v-model="searchFormData.name"></a-input>
+          <a-input v-model="searchFormData.keywords"></a-input>
         </a-form-model-item>
-        <a-form-model-item label="录入时间">
+        <a-form-model-item label="状态" prop="state">
+          <common-dict-select
+            v-model="searchFormData.state"
+            dictCode="basicDriverState"
+          ></common-dict-select>
+        </a-form-model-item>
+        <a-form-model-item label="录入时间" prop="date">
           <a-range-picker v-model="searchFormData.date"> </a-range-picker>
         </a-form-model-item>
         <a-form-model-item>
           <a-button type="primary" @click="queryByForm"> 查询 </a-button>
-          <a-button type="primary" @click="queryByForm"> 重置 </a-button>
+          <a-button type="primary" @click="resetForm"> 重置 </a-button>
         </a-form-model-item>
       </a-form-model>
     </div>
@@ -39,65 +49,59 @@
       <a-button icon="check" type="primary" @click="openFormModal()">
         审核
       </a-button>
+      <a-button icon="user" type="primary" @click="openFormModal()">
+        生成用户账号
+      </a-button>
       <a-button icon="left" type="primary" @click="openFormModal()">
         弃审
       </a-button>
-      <a-button icon="reload" type="primary" @click="openFormModal()">
-        更新终端
-      </a-button>
-      <a-button icon="delete" type="primary" @click="openFormModal()">
-        删除终端
-      </a-button>
-      <a-button icon="setting" type="primary" @click="openFormModal()">
-        批量设置跟踪定位
-      </a-button>
     </div>
     <a-table
-      bordered
-      row-key="id"
-      size="middle"
-      :loading="loading"
       :columns="columns"
+      row-key="code"
       :data-source="data"
-      :scroll="tableScroll"
       :pagination="pagination"
+      :loading="loading"
       @change="handlePaginationChange"
-      :row-selection="rowSelection"
+      size="middle"
+      :scroll="tableScroll"
+      bordered
     >
-      <template slot="isGps" slot-scope="isGps">
+      <template slot="isUse" slot-scope="isUse">
         <a-switch
           checked-children="启用"
           un-checked-children="禁用"
-          :checked="isGps === 1"
+          :checked="isUse === 1"
         />
       </template>
       <template slot="operation" slot-scope="record">
         <a-link @click="openFormModal(record)">编辑</a-link>
         &nbsp;&nbsp;
-        <a-popconfirm title="确定删除吗？" @confirm="() => onDelete(record)">
-          <a-link type="danger">删除</a-link>
+        <a-popconfirm title="确定删除吗？" @confirm="onDelete(record)" disabled>
+          <a-link type="danger" disabled> 删除 </a-link>
         </a-popconfirm>
       </template>
     </a-table>
-    <car-modal
+    <driver-modal
       :title="modalTitle"
       :visible.sync="visible"
       :formData="editFormData"
-    ></car-modal>
+    ></driver-modal>
   </div>
 </template>
 <script>
-import dataSource from './carMock'
+import dataSource from './driverMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
-import carModal from './carModal.vue'
+import DriverModal from './driverModal.vue'
 export default {
+  name: 'DriverManage',
   data() {
     return {
-      editFormData: null,
       searchFormData: {
         custType: '',
-        name: '',
+        state: '',
+        keywords: '',
         date: []
       },
       data: dataSource.list,
@@ -105,7 +109,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { carModal },
+  components: { DriverModal },
   mixins: [tableMixin],
   computed: {},
   methods: {

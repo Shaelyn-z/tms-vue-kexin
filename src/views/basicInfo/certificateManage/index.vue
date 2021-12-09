@@ -1,4 +1,4 @@
-<!-- 车辆管理 -->
+<!-- 证书管理 -->
 <template>
   <div class="container">
     <div ref="searchForm" id="searchForm">
@@ -25,7 +25,6 @@
         </a-form-model-item>
         <a-form-model-item>
           <a-button type="primary" @click="queryByForm"> 查询 </a-button>
-          <a-button type="primary" @click="queryByForm"> 重置 </a-button>
         </a-form-model-item>
       </a-form-model>
     </div>
@@ -33,64 +32,46 @@
       <a-button icon="plus" type="primary" @click="openFormModal()">
         新增
       </a-button>
-      <a-button icon="cloud-upload" type="primary" @click="openFormModal()">
-        导入
-      </a-button>
-      <a-button icon="check" type="primary" @click="openFormModal()">
-        审核
-      </a-button>
-      <a-button icon="left" type="primary" @click="openFormModal()">
-        弃审
-      </a-button>
-      <a-button icon="reload" type="primary" @click="openFormModal()">
-        更新终端
-      </a-button>
-      <a-button icon="delete" type="primary" @click="openFormModal()">
-        删除终端
-      </a-button>
-      <a-button icon="setting" type="primary" @click="openFormModal()">
-        批量设置跟踪定位
-      </a-button>
     </div>
     <a-table
-      bordered
-      row-key="id"
-      size="middle"
-      :loading="loading"
       :columns="columns"
+      row-key="code"
       :data-source="data"
-      :scroll="tableScroll"
       :pagination="pagination"
+      :loading="loading"
       @change="handlePaginationChange"
-      :row-selection="rowSelection"
+      size="middle"
+      :scroll="tableScroll"
+      :rowSelection="rowSelection"
+      bordered
     >
-      <template slot="isGps" slot-scope="isGps">
+      <template slot="isUse" slot-scope="isUse">
         <a-switch
-          checked-children="启用"
-          un-checked-children="禁用"
-          :checked="isGps === 1"
+          checked-children="是"
+          un-checked-children="否"
+          :checked="isUse === 1"
         />
       </template>
       <template slot="operation" slot-scope="record">
         <a-link @click="openFormModal(record)">编辑</a-link>
         &nbsp;&nbsp;
-        <a-popconfirm title="确定删除吗？" @confirm="() => onDelete(record)">
+        <a-popconfirm title="确定删除吗？" @confirm="onDelete(record)">
           <a-link type="danger">删除</a-link>
         </a-popconfirm>
       </template>
     </a-table>
-    <car-modal
+    <certificate-modal
       :title="modalTitle"
       :visible.sync="visible"
       :formData="editFormData"
-    ></car-modal>
+    ></certificate-modal>
   </div>
 </template>
 <script>
-import dataSource from './carMock'
+import dataSource from './certificateMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
-import carModal from './carModal.vue'
+import CertificateModal from './certificateModal.vue'
 export default {
   data() {
     return {
@@ -100,12 +81,14 @@ export default {
         name: '',
         date: []
       },
+      modalTitle: '',
       data: dataSource.list,
       loading: false,
+      visible: false,
       columns: tableColumn
     }
   },
-  components: { carModal },
+  components: { CertificateModal },
   mixins: [tableMixin],
   computed: {},
   methods: {
@@ -121,6 +104,13 @@ export default {
      */
     onDelete(record) {
       console.log('删除菜单', record.id)
+    },
+    openFormModal(record) {
+      this.modalTitle = record ? '编辑' : '新增'
+      this.editFormData = record
+        ? Object.assign({ time: +new Date() }, record)
+        : null
+      this.visible = true
     }
   }
 }

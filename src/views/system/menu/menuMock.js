@@ -167,7 +167,7 @@ export default Mock.mock({ // 属性 list 的值是一个数组，其中含有 1
   'list|20': [
     {
       'name': '@cname',
-      'path': '/@string',
+      'path': '/@word(5,10)',
       type: 'menu',
       'icon|1': icons,
       'sort|+1': 110,
@@ -175,7 +175,7 @@ export default Mock.mock({ // 属性 list 的值是一个数组，其中含有 1
       'children|1-5': [
         {
           'name|1-4': '@cname',
-          'path': '/@string',
+          'path': '/@word(5,10)/@word(5,10)',
           type: 'subMenu',
           'icon|1': icons,
           'sort+1': 110,

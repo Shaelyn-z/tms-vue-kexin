@@ -35,6 +35,41 @@ export const constantRouterMap = [
         path: '/basicInfo/carManage',
         component: () => import ('@/views/basicInfo/carManage')
       },
+      {
+        path: '/basicInfo/driverManage',
+        component: () => import ('@/views/basicInfo/driverManage')
+      }, {
+        path: '/basicInfo/certificateManage',
+        component: () => import ('@/views/basicInfo/certificateManage')
+      },
+      {
+        path: '/basicInfo/siteManage',
+        component: () => import ('@/views/basicInfo/siteManage')
+      }, {
+        path: '/basicInfo/lineManage',
+        component: () => import ('@/views/basicInfo/lineManage')
+      },
+      {
+        path: '/basicInfo/custLineQuotation',
+        component: () => import ('@/views/basicInfo/custLineQuotation')
+      }, {
+        path: '/basicInfo/carrierLineQuotation',
+        component: () => import ('@/views/basicInfo/carrierLineQuotation')
+      }, {
+        path: '/basicInfo/rireArchive',
+        component: () => import ('@/views/basicInfo/rireArchive')
+      },
+      {
+        path: '/basicInfo/carRireManage',
+        component: () => import ('@/views/basicInfo/carRireManage')
+      }, {
+        path: '/basicInfo/fleetManage',
+        component: () => import ('@/views/basicInfo/fleetManage')
+      },
     ]
   },
+  {
+    path: '*',
+    component: () => import ('@/views/error/Page404')
+  }
 ]

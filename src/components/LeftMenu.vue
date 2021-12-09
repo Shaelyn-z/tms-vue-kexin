@@ -44,10 +44,14 @@ export default {
   computed: {
     ...mapState('menu', ['allMenuList', 'currMenu']),
     menuList() {
-      return this.allMenuList.filter((item) => !item.children)
+      return this.allMenuList
+        .filter((item) => !item.children)
+        .sort((pre, next) => {
+          return pre.sort - next.sort
+        })
     },
     subMenuList() {
-      return this.allMenuList.filter((item) => item.children)
+      return this.deepSortMenu(this.allMenuList.filter((item) => item.children))
     }
   },
   methods: {
@@ -61,6 +65,20 @@ export default {
         path: key,
         name: item.$el.innerText,
         pathList: keyPath
+      })
+    },
+    /**
+     * @description 根据菜单的sort字段进行排序
+     * @param {Array} list 菜单数组
+     * @return {Array} sortList 排序后的菜单数组
+     */
+    deepSortMenu(list) {
+      list.forEach(
+        (item) =>
+          item.children && (item.children = this.deepSortMenu(item.children))
+      )
+      return list.sort((pre, next) => {
+        return pre.sort - next.sort
       })
     }
   }

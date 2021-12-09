@@ -47,6 +47,9 @@ export default {
   opacity: 0.5;
   cursor: not-allowed;
 }
+.a-link--default {
+  color: @primary-color;
+}
 .a-link--danger {
   color: #ff5722;
 }

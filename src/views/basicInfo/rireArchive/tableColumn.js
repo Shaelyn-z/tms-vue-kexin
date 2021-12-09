@@ -1,32 +1,36 @@
-import {renderCellByDict} from '@/assets/js/formatter'
 const tableColumns = [
   {
     title: '序号',
     dataIndex: 'index',
     width: 50,
-    fixed: 'left',
     customRender: (text, record, index) => index + 1
+  },
+  {
+    title: '轮胎编码',
+    dataIndex: 'code',
+    width: 100
+  },
+  {
+    title: '日期',
+    dataIndex: 'date',
+    width: 100
+  },
+  {
+    title: '是否生效',
+    dataIndex: 'isUse',
+    width: 100
   }, {
-    title: '人员类别',
-    dataIndex: 'custType',
-    width: 100,
-    customRender: value => {
-      return renderCellByDict('vehicleType', value)
-    }
+    title: '是否翻新',
+    dataIndex: 'isNew',
+    width: 100
   }, {
-    title: '是否禁用',
-    dataIndex: 'cname',
-    width: 100,
-    scopedSlots: {
-      customRender: 'isUse'
-    }
+    title: '是否报废',
+    dataIndex: 'isBaofei',
+    width: 100
   }, {
-    title: '操作',
-    scopedSlots: {
-      customRender: 'operation'
-    },
-    width: 140,
-    fixed: 'right'
+    title: '轮胎编号',
+    dataIndex: 'rireNo',
+    width: 100
   }
 ]
 

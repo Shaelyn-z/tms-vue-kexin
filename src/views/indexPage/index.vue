@@ -1,21 +1,24 @@
 <template>
-  <div>
-    <div class="plan" v-for="(plan, index) in planList" :key="index">
-      <div class="plan-title">{{ plan.title }}</div>
-      <div class="plan-list">
-        <div
-          class="plan-item"
-          v-for="(item, index) in planSubList"
-          :key="index"
-        >
-          {{ item.title }}
+  <vuedraggable class="wrapper" v-model="planList">
+    <transition-group>
+      <div class="plan" v-for="plan in planList" :key="plan.key">
+        <div class="plan-title">{{ plan.title }}</div>
+        <div class="plan-list">
+          <div
+            class="plan-item"
+            v-for="(item, index) in planSubList"
+            :key="index"
+          >
+            {{ item.title }}
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+    </transition-group>
+  </vuedraggable>
 </template>
 
 <script>
+import vuedraggable from 'vuedraggable'
 export default {
   name: 'IndexPage',
   data() {
@@ -35,6 +38,9 @@ export default {
         { title: '已卸货', key: 'total6' }
       ]
     }
+  },
+  components: {
+    vuedraggable
   }
 }
 </script>
@@ -48,6 +54,7 @@ export default {
     line-height: 30px;
     font-size: 14px;
     padding: 0px 10px;
+    cursor: move;
     background: rgb(238, 238, 238);
   }
   .plan-list {

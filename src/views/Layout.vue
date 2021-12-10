@@ -73,7 +73,8 @@ export default {
     background-color: white;
   }
   .content {
-    width: calc(100% - 210px);
+    flex: 1;
+    overflow: hidden;
     height: calc(100% - 60px);
     background: #f0f2f5;
     .content-body {

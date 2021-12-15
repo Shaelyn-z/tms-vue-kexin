@@ -69,6 +69,16 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/business',
+    component: () => import ('@/views/Layout'),
+    children: [
+      {
+        path: '/business/waybillinformation',
+        component: () => import ('@/views/business/waybillInformation'),
+      },
+    ]
+  }, 
+  {
     path: '*',
     component: () => import ('@/views/error/Page404')
   }

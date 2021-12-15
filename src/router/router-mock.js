@@ -7,7 +7,7 @@ const routeList = [
     path: '/system',
     icon: 'setting',
     name: '系统管理',
-    sort: 200,
+    sort: 1000,
     children: [
       {
         path: '/system/menu',
@@ -85,6 +85,19 @@ const routeList = [
         sort: 550,
       }
     ]
+  },
+  {
+    path: '/business',
+    icon: 'profile',
+    name: '运单管理',
+    sort: 200,
+    children: [
+      {
+        path: '/business/waybillinformation',
+        icon: 'contacts',
+        name: '运单信息',
+        sort: 50,
+      },]
   }
 ]
 export default routeList

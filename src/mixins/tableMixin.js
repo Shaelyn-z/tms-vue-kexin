@@ -39,7 +39,7 @@ export default {
   computed: {},
   mounted() {
     this.$nextTick(() => {
-      // 通过container - 顶部搜索栏高度 - 顶部按钮栏高度 - 底部分页组件高度
+      // 通过container - 顶部搜索栏高度 - 顶部按钮栏高度 - 底部分页组件高度 - 表格头部及其他padding高度
       this.tableScroll = {
         x: true,
         y: document.getElementsByClassName('container')[0].clientHeight - this.$refs.tableOperator.clientHeight - this.$refs.searchForm.clientHeight - 140

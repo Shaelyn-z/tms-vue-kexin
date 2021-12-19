@@ -1,8 +1,8 @@
 <!--公共数据搜索条件折叠面板-->
 <template>
-  <a-collapse accordion>
+  <a-collapse accordion  v-model="activeKey" ref="searchForm">
     <a-collapse-panel key="1" header="搜索条件">
-      <div ref="searchForm" id="searchForm">
+      <div id="searchForm">
         <a-form-model layout="inline" :model="searchFormData">
           <a-form-model-item label="客商类型">
             <common-dict-select
@@ -24,6 +24,11 @@
           <a-form-model-item label="录入时间">
             <a-range-picker v-model="searchFormData.date"> </a-range-picker>
           </a-form-model-item>
+         
+          
+          
+
+          
           <a-form-model-item>
             <a-button type="primary" @click="queryByForm"> 查询 </a-button>
             <a-button type="primary" @click="queryByForm"> 重置 </a-button>
@@ -50,12 +55,18 @@ export default {
   },
   data() {
     return {
+      activeKey:[1],
       searchFormData: {
         custType: '',
         name: '',
         date: []
       }
     }
+  },
+  created(){
+    // this.$nextTick(()=>{
+    //    this.$emit('searchFormCreated',this.$refs.searchForm.clientHeight);
+    // })
   },
   methods: {
     /**
@@ -68,5 +79,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+.ant-collapse {
+  margin-bottom: 15px;
+}
 </style>

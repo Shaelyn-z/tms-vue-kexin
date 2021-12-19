@@ -1,11 +1,11 @@
 export default {
-  data() {
+  data () {
     return {
       pagination: {
         current: 1,
         pageSize: 15,
         pageSizeOptions: [
-          '15', '25', '50', '80'
+          '15', '25', '50', '100', '200'
         ],
         showTotal: (total, range) => {
           return range[0] + '-' + range[1] + ' 共' + total + '条'
@@ -14,7 +14,7 @@ export default {
         showSizeChanger: true,
         total: 0
       },
-      tableScroll: {x: true, y: 500},
+      tableScroll: { x: true, y: 500 },
       rowSelection: {
         columnWidth: 50,
         onChange: (selectedRowKeys, selectedRows) => {
@@ -37,13 +37,15 @@ export default {
     }
   },
   computed: {},
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
-      // 通过container - 顶部搜索栏高度 - 顶部按钮栏高度 - 底部分页组件高度
-      this.tableScroll = {
-        x: true,
-        y: document.getElementsByClassName('container')[0].clientHeight - this.$refs.tableOperator.clientHeight - this.$refs.searchForm.clientHeight - 140
-      }
+      setTimeout(() => {
+        // 通过container - 顶部搜索栏高度 - 顶部按钮栏高度 - 底部分页组件高度 - 表格头部及其他padding高度
+        this.tableScroll = {
+          x: true,
+          y: document.getElementsByClassName('container')[0].clientHeight - this.$refs.tableOperator.clientHeight - this.$refs.searchForm.$el.clientHeight - 140
+        }
+      }, 200)
     })
 
   },
@@ -51,20 +53,20 @@ export default {
     /**
      * @description 重置搜索表单
     */
-    resetForm() {
+    resetForm () {
       this.$refs.searchFormModel.resetFields()
-    }, 
+    },
     /**
      * @description 监听表格组件中分页组件的改变
      */
-    handlePaginationChange(pagination) {
+    handlePaginationChange (pagination) {
       this.pagination = pagination
     },
     /**
      * @description 定义表格行的相关事件
      * @param {*} record 行内数据
     */
-    customRow(record) {
+    customRow (record) {
       return {
         on: {
           // 行双击事件，打开编辑弹框
@@ -78,7 +80,7 @@ export default {
      * @description 打开新增/编辑弹框
      * @param {*} record 行内数据
     */
-    openFormModal(record) {
+    openFormModal (record) {
       this.modalTitle = record ? '编辑' : '新增'
       this.editFormData = record
         ? Object.assign({ time: +new Date() }, record)

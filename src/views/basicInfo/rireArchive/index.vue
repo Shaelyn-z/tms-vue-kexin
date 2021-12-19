@@ -36,17 +36,13 @@
       <a-button type="primary" @click="openFormModal()"> 报废 </a-button>
       <a-button type="primary" @click="openFormModal()"> 翻新 </a-button>
     </div>
-    <a-table
+    <common-table
       :columns="columns"
-      row-key="code"
-      :data-source="data"
-      :pagination="pagination"
       :loading="loading"
-      @change="handlePaginationChange"
-      size="middle"
+      :data-source="data"
       :scroll="tableScroll"
-      :customRow="customRow"
-      bordered
+      @handlerEdit="openFormModal"
+      @handlerDelete="onDelete"
     >
       <template slot="isUse" slot-scope="isUse">
         <a-switch
@@ -55,14 +51,7 @@
           :checked="isUse === 1"
         />
       </template>
-      <template slot="operation" slot-scope="record">
-        <a-button @click="openFormModal(record)" size="small">编辑</a-button>
-        &nbsp;&nbsp;
-        <a-popconfirm title="确定删除吗？" @confirm="onDelete(record)">
-          <a-button type="danger" size="small">删除</a-button>
-        </a-popconfirm>
-      </template>
-    </a-table>
+    </common-table>
     <rire-modal
       :title="modalTitle"
       :visible.sync="visible"
@@ -75,6 +64,7 @@ import dataSource from './rireArchiveMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
 import RireModal from './rireModal.vue'
+import CommonTable from '@/components/common/CommonTable.vue'
 export default {
   data() {
     return {
@@ -88,7 +78,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { RireModal },
+  components: { RireModal, CommonTable },
   mixins: [tableMixin],
   computed: {},
   methods: {

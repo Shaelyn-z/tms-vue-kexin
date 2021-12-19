@@ -33,17 +33,14 @@
         新增
       </a-button>
     </div>
-    <a-table
-      :columns="columns"
+    <common-table
       row-key="code"
-      :data-source="data"
-      :pagination="pagination"
+      :columns="columns"
       :loading="loading"
-      @change="handlePaginationChange"
-      size="middle"
+      :data-source="data"
       :scroll="tableScroll"
-      :rowSelection="rowSelection"
-      bordered
+      @handlerEdit="openFormModal"
+      @handlerDelete="onDelete"
     >
       <template slot="isUse" slot-scope="isUse">
         <a-switch
@@ -58,7 +55,7 @@
           <a-button type="danger" size="small">删除</a-button>
         </a-popconfirm>
       </template>
-    </a-table>
+    </common-table>
     <certificate-modal
       :title="modalTitle"
       :visible.sync="visible"
@@ -71,6 +68,7 @@ import dataSource from './certificateMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
 import CertificateModal from './certificateModal.vue'
+import CommonTable from '@/components/common/CommonTable.vue'
 export default {
   data() {
     return {
@@ -87,7 +85,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { CertificateModal },
+  components: { CertificateModal, CommonTable },
   mixins: [tableMixin],
   computed: {},
   methods: {

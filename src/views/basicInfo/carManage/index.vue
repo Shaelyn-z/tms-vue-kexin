@@ -52,18 +52,11 @@
         批量设置跟踪定位
       </a-button>
     </div>
-    <a-table
-      bordered
-      stripe
-      row-key="id"
-      size="middle"
+    <common-table
       :loading="loading"
       :columns="columns"
       :data-source="data"
       :scroll="tableScroll"
-      :pagination="pagination"
-      @change="handlePaginationChange"
-      :row-selection="rowSelection"
     >
       <template slot="isGps" slot-scope="isGps">
         <a-switch
@@ -78,7 +71,7 @@
           <a-button type="danger" size="small">删除</a-button>
         </a-popconfirm>
       </template>
-    </a-table>
+    </common-table>
     <car-modal
       :title="modalTitle"
       :visible.sync="visible"
@@ -91,6 +84,7 @@ import dataSource from './carMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
 import carModal from './carModal.vue'
+import CommonTable from '@/components/common/CommonTable.vue'
 export default {
   data() {
     return {
@@ -105,7 +99,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { carModal },
+  components: { carModal, CommonTable },
   mixins: [tableMixin],
   computed: {},
   methods: {

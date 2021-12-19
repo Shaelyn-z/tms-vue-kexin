@@ -1,6 +1,6 @@
 <template>
   <header class="top-header">
-    <div class="logo"></div>
+    <div class="logo">九丰智慧订单平台</div>
     <div class="center">
       <a-icon
         :type="menuCollapsed ? 'menu-unfold' : 'menu-fold'"
@@ -119,6 +119,7 @@ export default {
   font-size: 14px;
   .logo {
     width: 210px;
+   text-align: center;
   }
   .logo-expand {
     width: 80px;

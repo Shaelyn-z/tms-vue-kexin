@@ -22,6 +22,7 @@ import {
   Upload,
   Result,
   Tooltip,
+  Collapse,
   Empty
 } from 'ant-design-vue'
 
@@ -49,6 +50,7 @@ export default {
     Vue.use(Upload)
     Vue.use(Result)
     Vue.use(Tooltip)
+    Vue.use(Collapse)
     Vue.use(Empty)
     Vue.prototype.$message = message
   }

@@ -1,3 +1,4 @@
+<!-- 客商管理 -->
 <template>
   <div class="container">
     <div ref="searchForm" id="searchForm">
@@ -10,10 +11,12 @@
         </a-form-model-item>
         <a-form-model-item>
           <template slot="label">
-            <a-popover>
-              <template slot="content"> 输入关键字进行搜索 </template>
+            <a-tooltip placement="right">
+              <template slot="title">
+                可输入姓名 隶属运营商 手机号 身份证号 发证机关查询
+              </template>
               关键字&nbsp;<a-icon type="question-circle" />
-            </a-popover>
+            </a-tooltip>
           </template>
           <a-input v-model="searchFormData.name"></a-input>
         </a-form-model-item>
@@ -26,18 +29,18 @@
       </a-form-model>
     </div>
     <div ref="tableOperator" class="table-operator">
-      <a-button icon="plus" type="primary" @click="openFormModal()"
-        >新增</a-button
-      >
+      <a-button icon="plus" type="primary" @click="openFormModal()">
+        新增
+      </a-button>
       <a-button icon="cloud-upload" type="primary" @click="openFormModal()">
         导入
       </a-button>
       <a-button icon="check" type="primary" @click="openFormModal()">
         审核
       </a-button>
-      <a-button icon="left" type="primary" @click="openFormModal()"
-        >弃审</a-button
-      >
+      <a-button icon="left" type="primary" @click="openFormModal()">
+        弃审
+      </a-button>
     </div>
     <a-table
       :columns="columns"
@@ -48,6 +51,7 @@
       @change="handlePaginationChange"
       size="middle"
       :scroll="tableScroll"
+      :customRow="customRow"
       bordered
     >
       <template slot="isUse" slot-scope="isUse">
@@ -58,41 +62,39 @@
         />
       </template>
       <template slot="operation" slot-scope="record">
-        <a-popconfirm title="确定删除吗？" @confirm="() => onDelete(record)">
-          <a href="javascript:;">删除</a>
+        <a-link @click="openFormModal(record)">编辑</a-link>
+        &nbsp;&nbsp;
+        <a-popconfirm title="确定删除吗？" @confirm="onDelete(record)">
+          <a-link type="danger">删除</a-link>
         </a-popconfirm>
-        <a href="javascript:;" @click="openFormModal(record)">&nbsp;编辑</a>
       </template>
     </a-table>
-    <common-form-modal
+    <merchant-modal
       :title="modalTitle"
       :visible.sync="visible"
-      :formColumns="columns.filter((item) => item.editOption)"
       :formData="editFormData"
-      label-width="120px"
-    ></common-form-modal>
+    ></merchant-modal>
   </div>
 </template>
 <script>
 import dataSource from './merchantMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
+import MerchantModal from './merchantModal.vue'
 export default {
   data() {
     return {
-      editFormData: null,
       searchFormData: {
         custType: '',
         name: '',
         date: []
       },
-      modalTitle: '',
       data: dataSource.list,
       loading: false,
-      visible: false,
       columns: tableColumn
     }
   },
+  components: { MerchantModal },
   mixins: [tableMixin],
   computed: {},
   methods: {
@@ -108,13 +110,6 @@ export default {
      */
     onDelete(record) {
       console.log('删除菜单', record.id)
-    },
-    openFormModal(record) {
-      this.modalTitle = record ? '编辑' : '新增'
-      this.editFormData = record
-        ? Object.assign({ time: +new Date() }, record)
-        : null
-      this.visible = true
     }
   }
 }

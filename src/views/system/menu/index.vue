@@ -31,10 +31,11 @@
         <a-icon :type="record" />
       </template>
       <template slot="operation" slot-scope="record">
+        <a-link @click="openDrawer(record)">编辑</a-link>
+        &nbsp;&nbsp;
         <a-popconfirm title="确定删除吗？" @confirm="() => onDelete(record)">
-          <a href="javascript:;">删除</a>
+          <a-link type="danger">删除</a-link>
         </a-popconfirm>
-        <a href="javascript:;" @click="openDrawer(record)">&nbsp;编辑</a>
       </template>
     </a-table>
 
@@ -60,7 +61,7 @@
         <a-form-model-item
           label="父级菜单"
           prop="parent"
-          v-if="formInline.menuOption === 'subMenu'"
+          v-if="formInline.type === 'subMenu'"
         >
           <a-select showSearch v-model="formInline.parent">
             <a-select-option

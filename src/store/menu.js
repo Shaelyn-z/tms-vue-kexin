@@ -1,4 +1,4 @@
-import {getStore, setStore} from '@/assets/js/utils'
+import {getStore, setLocalStore, setSessionStore} from '@/assets/js/utils'
 export default {
   namespaced: true,
   state: {
@@ -9,7 +9,7 @@ export default {
   mutations: {
     setAllMenuList: (state, payload) => {
       state.allMenuList = payload
-      setStore('allMenuList', payload)
+      setLocalStore('allMenuList', payload)
     },
     // 新增菜单tab页
     addOpenMenu: (state, payload) => {
@@ -17,7 +17,7 @@ export default {
       const isOpend = state.openMenuList.find(item => item.path === payload.path)
       if (! isOpend) {
         state.openMenuList = state.openMenuList.concat(payload)
-        setStore('openMenuList', state.openMenuList)
+        setSessionStore('openMenuList', state.openMenuList)
       }
     },
     // 关闭已打开的菜单
@@ -56,21 +56,21 @@ export default {
           break;
       }
       state.currMenu = currMenu
-      setStore('currMenu', currMenu)
-      setStore('openMenuList', state.openMenuList)
+      setSessionStore('currMenu', currMenu)
+      setSessionStore('openMenuList', state.openMenuList)
     },
     setCurrMenu: (state, payload) => {
       state.currMenu = payload
-      setStore('currMenu', payload)
+      setSessionStore('currMenu', payload)
     },
     // 清除所有数据
     clearAll: state => {
       state.allMenuList = []
       state.openMenuList = [{path:"/index",name:"首页",closable:false}]
       state.currMenu = {path:"/index",name:"首页"}
-      setStore('allMenuList', state.allMenuList)
-      setStore('openMenuList', state.openMenuList)
-      setStore('currMenu', state.currMenu)
+      setLocalStore('allMenuList', state.allMenuList)
+      setSessionStore('openMenuList', state.openMenuList)
+      setSessionStore('currMenu', state.currMenu)
     }
   }
 }

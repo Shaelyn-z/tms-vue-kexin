@@ -1,5 +1,5 @@
 <template>
-  <header class="top-header">
+  <header class="top-header" style="height:60px">
     <div class="logo">九丰智慧订单平台</div>
     <div class="center">
       <a-icon
@@ -120,6 +120,7 @@ export default {
   .logo {
     width: 210px;
    text-align: center;
+   font-size: 20px;
   }
   .logo-expand {
     width: 80px;

@@ -24,7 +24,6 @@ export function renderCellByDict(dictCode, value) {
   }, {})
   return vm.$createElement('span', {
     style: {
-      border: `1px solid ${valueMap[value].color}`,
       color: valueMap[value].color,
       borderRadius: '3px',
       display: 'inline-block',

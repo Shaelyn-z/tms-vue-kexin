@@ -41,34 +41,23 @@
         导入
       </a-button>
     </div>
-    <a-table
-      bordered
-      size="middle"
+    <common-table
       row-key="code"
       :columns="columns"
       :loading="loading"
       :data-source="data"
       :scroll="tableScroll"
-      :customRow="customRow"
-      :pagination="pagination"
-      :rowSelection="rowSelection"
-      @change="handlePaginationChange"
+      @handlerEdit="openFormModal"
+      @handlerDelete="onDelete"
     >
-      <template slot="isUse" slot-scope="isUse">
+      <template slot="isUse" slot-scope="{ record }">
         <a-switch
           checked-children="是"
           un-checked-children="否"
-          :checked="isUse === 1"
+          :checked="record.isUse === 1"
         />
       </template>
-      <template slot="operation" slot-scope="record">
-        <a-link @click="openFormModal(record)">编辑</a-link>
-        &nbsp;&nbsp;
-        <a-popconfirm title="确定删除吗？" @confirm="onDelete(record)">
-          <a-link type="danger">删除</a-link>
-        </a-popconfirm>
-      </template>
-    </a-table>
+    </common-table>
     <line-modal
       :title="modalTitle"
       :visible.sync="visible"
@@ -81,6 +70,7 @@ import dataSource from './lineManageMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
 import LineModal from './lineModal.vue'
+import CommonTable from '@/components/common/CommonTable.vue'
 export default {
   data() {
     return {
@@ -94,7 +84,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { LineModal },
+  components: { LineModal, CommonTable },
   mixins: [tableMixin],
   computed: {},
   methods: {

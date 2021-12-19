@@ -62,10 +62,10 @@
         />
       </template>
       <template slot="operation" slot-scope="record">
-        <a-link @click="openFormModal(record)">编辑</a-link>
+        <a-button @click="openFormModal(record)" size="small">编辑</a-button>
         &nbsp;&nbsp;
         <a-popconfirm title="确定删除吗？" @confirm="onDelete(record)">
-          <a-link type="danger">删除</a-link>
+          <a-button type="danger" size="small">删除</a-button>
         </a-popconfirm>
       </template>
     </a-table>

@@ -31,10 +31,9 @@
         <a-icon :type="record" />
       </template>
       <template slot="operation" slot-scope="record">
-        <a-link @click="openDrawer(record)">编辑</a-link>
-        &nbsp;&nbsp;
+        <a-button @click="openDrawer(record)" size="small">编辑</a-button>
         <a-popconfirm title="确定删除吗？" @confirm="() => onDelete(record)">
-          <a-link type="danger">删除</a-link>
+          <a-button type="danger" size="small">删除</a-button>
         </a-popconfirm>
       </template>
     </a-table>

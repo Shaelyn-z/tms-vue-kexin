@@ -1,78 +1,74 @@
-import {renderCellByDict} from '@/assets/js/formatter'
 const tableColumns = [
   {
     title: '序号',
-    dataIndex: 'index',
-    width: 50,
+    type: 'seq',
+    minWidth: 50,
     fixed: 'left',
-    customRender: (text, record, index) => index + 1
   },
   {
     title: '线路名称',
-    dataIndex: 'lineName',
-    width: 150
+    field: 'lineName',
+    minWidth: 150
   },
   {
     title: '出发地',
-    dataIndex: 'cname',
-    width: 100
+    field: 'cname',
+    minWidth: 100
   },
   {
     title: '目的地',
-    dataIndex: 'dengji',
-    width: 100
+    field: 'dengji',
+    minWidth: 100
   }, {
     title: '是否禁用',
-    dataIndex: 'sheng',
-    width: 100,
-    scopedSlots: {
-      customRender: 'isUse'
+    field: 'sheng',
+    minWidth: 100,
+    slots: {
+      default: 'isUse'
     }
   }, {
     title: '线路里程(KM)',
-    dataIndex: 'km',
-    width: 120
+    field: 'km',
+    minWidth: 120
   }, {
     title: '运费',
-    dataIndex: 'address',
-    width: 200
+    field: 'address',
+    minWidth: 200
   }, {
     title: '运费单位',
-    dataIndex: 'freightUnit',
-    width: 100,
-    customRender: value => {
-      return renderCellByDict('freightUnit', value)
-    }
+    field: 'freightUnit',
+    minWidth: 100,
+    cellRender: { name: 'DictCell', dictCode: 'freightUnit' }
   }, {
     title: '通行路桥费',
-    dataIndex: 'contact',
-    width: 100
+    field: 'contact',
+    minWidth: 100
   }, {
     title: '油耗费用',
-    dataIndex: 'tel',
-    width: 100
+    field: 'tel',
+    minWidth: 100
   }, {
     title: '其他费用',
-    dataIndex: 'r',
-    width: 100
+    field: 'r',
+    minWidth: 100
   }, {
     title: '预计耗时',
-    dataIndex: 'cus',
-    width: 100
+    field: 'cus',
+    minWidth: 100
   }, {
     title: '司机提成',
-    dataIndex: 'isCreate',
-    width: 120
+    field: 'isCreate',
+    minWidth: 120
   }, {
     title: '备注',
-    dataIndex: 'remark',
-    width: 140,
+    field: 'remark',
+    minWidth: 140,
   }, {
     title: '操作',
-    scopedSlots: {
-      customRender: 'operation'
+    slots: {
+      default: 'operation'
     },
-    width: 140,
+    minWidth: 140,
     fixed: 'right'
   }
 ]

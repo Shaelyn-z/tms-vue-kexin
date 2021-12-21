@@ -5,6 +5,7 @@ import store from './store'
 import Ant from './plugin/ant';
 import common from './plugin/common';
 import component from './plugin/component';
+import './plugin/vxeTable';
 import api from './api'
 import 'ant-design-vue/dist/antd.less';
 import '@/assets/css/common.less';

@@ -78,10 +78,9 @@ export default {
     this.columnDrop()
   },
   mounted() {
-    this.$nextTick(() => {
-      this.maxHeight =
-        document.querySelector('.draggable-table').clientHeight - 24.5
-    })
+    // 设置表格最大高度为父容器高度减去表格底部分页工具高度
+    this.maxHeight =
+      document.querySelector('.draggable-table').clientHeight - 24.5
   },
   beforeDestroy() {
     if (this.sortable) {

@@ -23,7 +23,8 @@ import {
   Result,
   Tooltip,
   Collapse,
-  Empty
+  Empty,
+  Pagination
 } from 'ant-design-vue'
 
 export default {
@@ -52,6 +53,7 @@ export default {
     Vue.use(Tooltip)
     Vue.use(Collapse)
     Vue.use(Empty)
+    Vue.use(Pagination)
     Vue.prototype.$message = message
   }
 }

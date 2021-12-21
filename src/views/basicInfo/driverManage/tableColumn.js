@@ -1,105 +1,99 @@
-import { renderCellByDict } from '@/assets/js/formatter'
 const tableColumns = [
   {
     title: '序号',
-    dataIndex: 'index',
-    width: 50,
+    minWidth: 50,
     fixed: 'left',
-    customRender: (text, record, index) => index + 1
+    type: 'seq',
   },
   {
     title: '人员类别',
-    dataIndex: 'personnelType',
-    width: 100,
-    customRender: value => {
-      return renderCellByDict('personnelType', value)
-    }
+    field: 'personnelType',
+    minWidth: 100,
+    cellRender: { name: 'DictCell', dictCode: 'personnelType' }
   },
   {
     title: '姓名',
-    dataIndex: 'name',
-    width: 100
+    field: 'name',
+    minWidth: 100
   },
   {
     title: '是否禁用',
-    dataIndex: 'isUse',
-    width: 100,
-    scopedSlots: {
-      customRender: 'isUse'
+    field: 'isUse',
+    minWidth: 100,
+    slots: {
+      default: 'isUse'
     }
   }, {
     title: '性别',
-    dataIndex: 'shortname',
-    width: 100
+    field: 'shortname',
+    minWidth: 100
   }, {
     title: '隶属营运商',
-    dataIndex: 'custName',
-    width: 100
+    field: 'custName',
+    minWidth: 100
   }, {
     title: '手机号',
-    dataIndex: 'status',
-    width: 100
+    field: 'status',
+    minWidth: 100
   }, {
     title: '身份证号',
-    dataIndex: 'id',
-    width: 100,
+    field: 'id',
+    minWidth: 100,
   }, {
     title: '出生日期',
-    dataIndex: 'industryName',
-    width: 120
+    field: 'industryName',
+    minWidth: 120
   }, {
     title: '发证机关',
-    dataIndex: 'areaName',
-    width: 120
+    field: 'areaName',
+    minWidth: 120
   }, {
     title: '身份证住址',
-    dataIndex: 'registFund',
-    width: 150
+    field: 'registFund',
+    minWidth: 150
   }, {
     title: '身份证有效期截止日期',
-    dataIndex: 'salemanName',
-    width: 200
+    field: 'salemanName',
+    minWidth: 200
   }, {
     title: '状态',
-    dataIndex: 'state',
-    width: 100,
-    customRender: value => {
-      return renderCellByDict('basicDriverState', value)
-    }
+    field: 'state',
+    minWidth: 100,
+    cellRender: { name: 'DictCell', dictCode: 'basicDriverState' }
   }, {
     title: '审核状态',
-    dataIndex: 'freezingDate',
-    width: 100
+    field: 'freezingDate',
+    minWidth: 100
   }, {
     title: '从业资格证件号',
-    dataIndex: 'contactman',
-    width: 150
+    field: 'contactman',
+    minWidth: 150
   }, {
-    dataIndex: 'contacttype',
+    field: 'contacttype',
     title: '从业资格类别',
-    width: 150
+    minWidth: 150
   }, {
     title: '从业资格证发证机关',
-    dataIndex: 'contactPhone',
-    width: 150
+    field: 'contactPhone',
+    minWidth: 150
   }, {
     title: '从业资格证初次发证时间',
-    dataIndex: 'contactPhone2',
-    width: 200
+    field: 'contactPhone2',
+    minWidth: 200
   }, {
     title: '从业资格证有效截止日期',
-    dataIndex: 'contactAddr',
-    width: 200
+    field: 'contactAddr',
+    minWidth: 200
   }, {
     title: '驾驶证有效期',
-    dataIndex: 'contactAddr2',
-    width: 150
+    field: 'contactAddr2',
+    minWidth: 150
   }, {
     title: '操作',
-    scopedSlots: {
-      customRender: 'operation'
+    slots: {
+      default: 'operation'
     },
-    width: 140,
+    minWidth: 140,
     fixed: 'right'
   }
 ]

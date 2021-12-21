@@ -1,36 +1,38 @@
 const tableColumns = [
   {
     title: '序号',
-    dataIndex: 'index',
-    width: 50,
-    customRender: (text, record, index) => index + 1
+    type: 'seq',
+    minWidth: 50
   },
   {
     title: '轮胎编码',
-    dataIndex: 'code',
-    width: 100
+    field: 'code',
+    minWidth: 100
   },
   {
     title: '日期',
-    dataIndex: 'date',
-    width: 100
+    field: 'date',
+    minWidth: 100
   },
   {
     title: '是否生效',
-    dataIndex: 'isUse',
-    width: 100
+    field: 'isUse',
+    minWidth: 100,
+    slots: {
+      default: 'isUse'
+    }
   }, {
     title: '是否翻新',
-    dataIndex: 'isNew',
-    width: 100
+    field: 'isNew',
+    minWidth: 100
   }, {
     title: '是否报废',
-    dataIndex: 'isBaofei',
-    width: 100
+    field: 'isBaofei',
+    minWidth: 100
   }, {
     title: '轮胎编号',
-    dataIndex: 'rireNo',
-    width: 100
+    field: 'rireNo',
+    minWidth: 100
   }
 ]
 

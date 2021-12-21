@@ -1,57 +1,49 @@
-import { renderCellByDict } from '@/assets/js/formatter'
 const tableColumns = [
   {
     title: '序号',
-    dataIndex: 'index',
-    width: 60,
-    customRender: (text, record, index) => index + 1
+    type: 'seq',
+    minWidth: 60,
   },
   {
     title: "车辆类型",
-    dataIndex: "carType",
-    width: 150,
-    customRender: value => {
-      return renderCellByDict('vehicleType', value)
-    }
+    field: "carType",
+    minWidth: 150,
+    cellRender: { name: 'DictCell', dictCode: 'vehicleType' }
   },
   {
-    dataIndex: "plateNumber",
+    field: "plateNumber",
     title: "车牌号",
-    width: 140
+    minWidth: 140
   }, {
-    dataIndex: "isGps",
+    field: "isGps",
     title: "跟踪定位",
-    width: 100,
-    scopedSlots: {
-      customRender: 'isGps'
+    minWidth: 100,
+    slots: {
+      default: 'isGps'
     }
   }, {
-    dataIndex: "carrierName",
+    field: "carrierName",
     title: "隶属运营商",
-    width: 230
+    minWidth: 230
   }, {
-    dataIndex: "frameNum",
+    field: "frameNum",
     title: "车架号",
-    width: 180
+    minWidth: 180
   }, {
-    dataIndex: "state",
+    field: "state",
     title: "状态",
-    width: 120,
-    customRender: (text) => {
-      return renderCellByDict('basicCarState', text)
-    }
+    minWidth: 120,
+    cellRender: { name: 'DictCell', dictCode: 'basicCarState' }
   }, {
-    dataIndex: "auditStatus",
+    field: "auditStatus",
     title: "审核状态",
-    width: 120,
-    customRender: (text) => {
-      return renderCellByDict('auditStatus', text)
-    }
+    minWidth: 120,
+    cellRender: { name: 'DictCell', dictCode: 'auditStatus' }
   }, {
     title: '操作',
-    width: 160,
-    scopedSlots: {
-      customRender: 'operation'
+    minWidth: 160,
+    slots: {
+      default: 'operation'
     }
   }
 ]

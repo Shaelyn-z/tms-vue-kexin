@@ -52,26 +52,21 @@
         批量设置跟踪定位
       </a-button>
     </div>
-    <common-table
-      :loading="loading"
-      :columns="columns"
-      :data-source="data"
-      :scroll="tableScroll"
-    >
-      <template slot="isGps" slot-scope="isGps">
+    <draggable-table :columns="columns" :tableData="data" class="main-table">
+      <template slot="isGps" slot-scope="{ row }">
         <a-switch
           checked-children="启用"
           un-checked-children="禁用"
-          :checked="isGps === 1"
+          :checked="row.isGps === 1"
         />
       </template>
-      <template slot="operation" slot-scope="record">
-        <a-button @click="openFormModal(record)" size="small">编辑</a-button>
-        <a-popconfirm title="确定删除吗？" @confirm="() => onDelete(record)">
+      <template slot="operation" slot-scope="{ row }">
+        <a-button @click="openFormModal(row)" size="small">编辑</a-button>
+        <a-popconfirm title="确定删除吗？" @confirm="onDelete(row)">
           <a-button type="danger" size="small">删除</a-button>
         </a-popconfirm>
       </template>
-    </common-table>
+    </draggable-table>
     <car-modal
       :title="modalTitle"
       :visible.sync="visible"
@@ -119,3 +114,9 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.main-table {
+  height: calc(100% - 100px);
+}
+</style>

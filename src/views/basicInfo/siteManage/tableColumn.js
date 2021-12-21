@@ -1,67 +1,66 @@
 const tableColumns = [
   {
     title: '序号',
-    dataIndex: 'index',
-    width: 50,
-    customRender: (text, record, index) => index + 1
+    type: 'seq',
+    minWidth: 50
   },
   {
     title: '地点编码',
-    dataIndex: 'code',
-    width: 100
+    field: 'code',
+    minWidth: 100
   },
   {
     title: '地点名称',
-    dataIndex: 'cname',
-    width: 100
+    field: 'cname',
+    minWidth: 100
   },
   {
     title: '站点等级',
-    dataIndex: 'dengji',
-    width: 100
+    field: 'dengji',
+    minWidth: 100
   }, {
     title: '省',
-    dataIndex: 'sheng',
-    width: 100
+    field: 'sheng',
+    minWidth: 100
   }, {
     title: '市',
-    dataIndex: 'shi',
-    width: 100
+    field: 'shi',
+    minWidth: 100
   }, {
     title: '详细地址',
-    dataIndex: 'address',
-    width: 200
+    field: 'address',
+    minWidth: 200
   }, {
     title: '是否禁用',
-    dataIndex: 'isUse',
-    width: 100,
-    scopedSlots: {customRender: 'isUse'}
+    field: 'isUse',
+    minWidth: 100,
+    slots: {default: 'isUse'}
   }, {
     title: '联系人',
-    dataIndex: 'contact',
-    width: 100
+    field: 'contact',
+    minWidth: 100
   }, {
     title: '联系电话',
-    dataIndex: 'tel',
-    width: 100
+    field: 'tel',
+    minWidth: 100
   }, {
     title: '半径（米）',
-    dataIndex: 'r',
-    width: 100
+    field: 'r',
+    minWidth: 100
   }, {
     title: '关联客户',
-    dataIndex: 'cus',
-    width: 100
+    field: 'cus',
+    minWidth: 100
   }, {
     title: '是否创建围栏',
-    dataIndex: 'isCreate',
-    width: 120
+    field: 'isCreate',
+    minWidth: 120
   }, {
     title: '操作',
-    scopedSlots: {
-      customRender: 'operation'
+    slots: {
+      default: 'operation'
     },
-    width: 140
+    minWidth: 140
   }
 ]
 

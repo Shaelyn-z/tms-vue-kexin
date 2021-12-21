@@ -8,6 +8,7 @@ import ALink from '@/components/common/ALink'
 import CommonDictSelect from '@/components/common/CommonDictSelect'
 import CommonDrawer from '@/components/common/CommonDrawer'
 import CommonPictUpload from '@/components/common/CommonPictUpload'
+import DraggableTable from '@/components/common/DraggableTable'
 
 export default {
   install(Vue) {
@@ -15,5 +16,6 @@ export default {
     Vue.component('common-dict-select', CommonDictSelect)
     Vue.component('common-drawer', CommonDrawer)
     Vue.component('common-pict-upload', CommonPictUpload)
+    Vue.component('draggable-table', DraggableTable)
   }
 }

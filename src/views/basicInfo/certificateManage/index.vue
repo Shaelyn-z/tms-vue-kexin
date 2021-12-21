@@ -33,29 +33,21 @@
         新增
       </a-button>
     </div>
-    <common-table
-      row-key="code"
-      :columns="columns"
-      :loading="loading"
-      :data-source="data"
-      :scroll="tableScroll"
-      @handlerEdit="openFormModal"
-      @handlerDelete="onDelete"
-    >
-      <template slot="isUse" slot-scope="isUse">
+    <draggable-table :columns="columns" :tableData="data" class="main-table">
+      <template slot="isUse" slot-scope="{ row }">
         <a-switch
           checked-children="是"
           un-checked-children="否"
-          :checked="isUse === 1"
+          :checked="row.isUse === 1"
         />
       </template>
-      <template slot="operation" slot-scope="record">
-        <a-button @click="openFormModal(record)" size="small">编辑</a-button>
-        <a-popconfirm title="确定删除吗？" @confirm="onDelete(record)">
+      <template slot="operation" slot-scope="{ row }">
+        <a-button @click="openFormModal(row)" size="small">编辑</a-button>
+        <a-popconfirm title="确定删除吗？" @confirm="onDelete(row)">
           <a-button type="danger" size="small">删除</a-button>
         </a-popconfirm>
       </template>
-    </common-table>
+    </draggable-table>
     <certificate-modal
       :title="modalTitle"
       :visible.sync="visible"
@@ -112,3 +104,9 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.main-table {
+  height: calc(100% - 100px);
+}
+</style>

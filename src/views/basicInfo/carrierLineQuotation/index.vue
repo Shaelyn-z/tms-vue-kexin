@@ -53,7 +53,7 @@
         <vxe-column field="operate" title="操作">
           <template #default="{ row }">
             <a-popconfirm title="是否要删除此行？" @confirm="handleDelete(row)">
-              <a-link type="danger">删除</a-link>
+              <a-button type="danger" size="small">删除</a-button>
             </a-popconfirm>
           </template>
         </vxe-column>

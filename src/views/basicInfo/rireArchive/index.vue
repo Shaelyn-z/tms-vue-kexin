@@ -64,7 +64,6 @@ import dataSource from './rireArchiveMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
 import RireModal from './rireModal.vue'
-import CommonTable from '@/components/common/CommonTable.vue'
 export default {
   data() {
     return {
@@ -78,7 +77,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { RireModal, CommonTable },
+  components: { RireModal },
   mixins: [tableMixin],
   computed: {},
   methods: {

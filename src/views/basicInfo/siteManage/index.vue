@@ -69,7 +69,6 @@ import dataSource from './merchantMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
 import MerchantModal from './merchantModal.vue'
-import CommonTable from '@/components/common/CommonTable.vue'
 export default {
   data() {
     return {
@@ -83,7 +82,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { MerchantModal, CommonTable },
+  components: { MerchantModal },
   mixins: [tableMixin],
   computed: {},
   methods: {

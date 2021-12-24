@@ -60,7 +60,6 @@ import dataSource from './certificateMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
 import CertificateModal from './certificateModal.vue'
-import CommonTable from '@/components/common/CommonTable.vue'
 export default {
   data() {
     return {
@@ -77,7 +76,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { CertificateModal, CommonTable },
+  components: { CertificateModal },
   mixins: [tableMixin],
   computed: {},
   methods: {

@@ -79,6 +79,7 @@ import dataSource from './carMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
 import carModal from './carModal.vue'
+import CommonTable from '@/components/common/CommonTable.vue'
 export default {
   data() {
     return {
@@ -93,7 +94,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { carModal },
+  components: { carModal, CommonTable },
   mixins: [tableMixin],
   computed: {},
   methods: {

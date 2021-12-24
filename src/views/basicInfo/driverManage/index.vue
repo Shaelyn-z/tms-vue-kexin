@@ -83,6 +83,7 @@ import dataSource from './driverMock'
 import tableMixin from '@/mixins/tableMixin'
 import tableColumn from './tableColumn'
 import DriverModal from './driverModal.vue'
+import CommonTable from '@/components/common/CommonTable.vue'
 export default {
   name: 'DriverManage',
   data() {
@@ -98,7 +99,7 @@ export default {
       columns: tableColumn
     }
   },
-  components: { DriverModal },
+  components: { DriverModal, CommonTable },
   mixins: [tableMixin],
   computed: {},
   methods: {

@@ -15,8 +15,11 @@
   padding: 15px;
 }
 .ant-table-wrapper[stripe] {
-  .ant-table-row:nth-child(odd) {
-    background-color: #f1f1f1;
+  .ant-table-thead {
+    background-color: @table-bg-color;
+  }
+  .ant-table-row:nth-child(even) {
+    background-color: @table-bg-color;
   }
 }
 

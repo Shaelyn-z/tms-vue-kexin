@@ -4,6 +4,7 @@
       border
       stripe
       columnKey
+      size="small"
       ref="draggableTable"
       class="draggable-table-bd"
       :max-height="maxHeight"

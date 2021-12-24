@@ -83,6 +83,11 @@ const routeList = [
         icon: 'team',
         name: '车队管理',
         sort: 550,
+      }, {
+        path: '/basicInfo/test',
+        icon: 'team',
+        name: '组件测试页',
+        sort: 600,
       }
     ]
   },

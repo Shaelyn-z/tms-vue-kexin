@@ -65,6 +65,9 @@ export const constantRouterMap = [
       }, {
         path: '/basicInfo/fleetManage',
         component: () => import ('@/views/basicInfo/fleetManage')
+      }, {
+        path: '/basicInfo/test',
+        component: () => import ('@/views/basicInfo/test')
       },
     ]
   },

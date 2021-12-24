@@ -44,9 +44,9 @@ export default {
     ...mapState('menu', ['openMenuList', 'currMenu'])
   },
   mounted() {
-    document.documentElement.onclick = () => {
+    document.documentElement.addEventListener('click', () => {
       this.visible = false
-    }
+    })
   },
   methods: {
     ...mapMutations('menu', ['deleteOpenMenu']),
@@ -91,9 +91,6 @@ export default {
       this.deleteOpenMenu(Object.assign({ type }, this.clickContextTab))
       this.$router.push({ path: this.clickContextTab.path })
     }
-  },
-  beforeDestroy() {
-    document.removeEventListener('click')
   }
 }
 </script>
